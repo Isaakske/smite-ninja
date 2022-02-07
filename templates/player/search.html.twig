@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="search-player">
+        {{ form_start(form, { 'action': path('player_search'), 'method': 'POST' }) }}
+            <div class="mb-3">
+                {{ form_label(form.playerName) }}
+                {{ form_widget(form.playerName) }}
+            </div>
+            <button type="submit" class="btn btn-primary">{{ 'player_search.search'|trans }}</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
