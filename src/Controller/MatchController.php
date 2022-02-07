@@ -14,6 +14,6 @@ class MatchController extends AbstractController
     #[Template]
     public function live(string $playerId)
     {
-        return $playerId;
+        die($playerId);
     }
 }
