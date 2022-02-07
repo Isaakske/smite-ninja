@@ -1,0 +1,22 @@
+version: "3.6"
+
+services:
+  nginx:
+    build:
+      context: ..
+      dockerfile: docker/nginx/Dockerfile
+    links:
+      - php
+    volumes:
+      - ..:/var/www:delegated
+      - ./nginx/conf/upstream.conf:/etc/nginx/conf.d/upstream.conf:delegated
+    ports:
+      - "80:80"
+
+  php:
+    build:
+      context: ..
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - ..:/var/www:delegated
+    entrypoint: /tools/run.phpfpm.locally.sh
