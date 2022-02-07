@@ -8,20 +8,23 @@ class Player
 {
     private int $id;
     private string $name;
-    private string $hirezName;
-    private Portal $portal;
+    private int $level;
+    private int $team;
+    private string $god;
+    private ?AccountInfo $accountInfo = null;
 
-    public function __construct(int $id, string $name, string $hirezName, Portal $portal)
+    public function __construct(int $id, string $name, int $level, int $team, string $god)
     {
         $this->id = $id;
         $this->name = $name;
-        $this->hirezName = $hirezName;
-        $this->portal = $portal;
+        $this->level = $level;
+        $this->team = $team;
+        $this->god = $god;
     }
 
     public static function createFromData(array $data): self
     {
-        return new self((int) $data['player_id'], $data['Name'], $data['hz_player_name'], Portal::fromIdentifier((int) $data['portal_id']));
+        return new self((int) $data['playerId'], $data['playerName'], (int) $data['Account_Level'], (int) $data['taskForce'], $data['GodName']);
     }
 
     public function getId(): int
@@ -44,23 +47,43 @@ class Player
         $this->name = $name;
     }
 
-    public function getHirezName(): string
+    public function getLevel(): int
     {
-        return $this->hirezName;
+        return $this->level;
     }
 
-    public function setHirezName(string $hirezName): void
+    public function setLevel(int $level): void
     {
-        $this->hirezName = $hirezName;
+        $this->level = $level;
     }
 
-    public function getPortal(): Portal
+    public function getTeam(): int
     {
-        return $this->portal;
+        return $this->team;
     }
 
-    public function setPortal(Portal $portal): void
+    public function setTeam(int $team): void
     {
-        $this->portal = $portal;
+        $this->team = $team;
+    }
+
+    public function getGod(): string
+    {
+        return $this->god;
+    }
+
+    public function setGod(string $god): void
+    {
+        $this->god = $god;
+    }
+
+    public function getAccountInfo(): ?AccountInfo
+    {
+        return $this->accountInfo;
+    }
+
+    public function setAccountInfo(?AccountInfo $accountInfo): void
+    {
+        $this->accountInfo = $accountInfo;
     }
 }

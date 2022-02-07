@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="match-live">
+        {% if not players %}
+            <div class="alert alert-danger">
+                {{ 'match_live.not_found'|trans }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

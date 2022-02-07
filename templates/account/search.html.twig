@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="account-search">
+        {{ form_start(form, { 'action': path('account_search'), 'method': 'POST' }) }}
+            <div class="mb-3">
+                {{ form_label(form.accountName) }}
+                {{ form_widget(form.accountName) }}
+            </div>
+            <button type="submit" class="btn btn-primary">{{ 'account_search.search'|trans }}</button>
+        {{ form_end(form) }}
+
+        {% if accounts %}
+            <div class="multiple-accounts">
+                <p class="multiple-accounts-title">{{ 'account_search.multiple_accounts_found'|trans }}</p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'account_search.name'|trans }}</th>
+                        <th>{{ 'account_search.hirez_name'|trans }}</th>
+                        <th>{{ 'account_search.platform'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for account in accounts %}
+                        <tr>
+                            <td><a href="{{ path('match_live', {'playerId': account.id}) }}">{{ account.name }}</a></td>
+                            <td>{{ account.hirezName }}</td>
+                            <td>{{ account.portal.name }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

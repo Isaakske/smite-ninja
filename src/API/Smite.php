@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\API;
 
+use App\Entity\Account;
+use App\Entity\AccountInfo;
+use App\Entity\Player;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -25,14 +28,41 @@ class Smite
         $this->authKey = $authKey;
     }
 
-    public function searchPlayers(string $playerName): array
+    public function searchAccounts(string $accountName): array
     {
-        $this->session->clear();
+        $accounts = $this->request('searchplayers', $accountName);
 
-        return $this->request('searchplayers', $playerName);
+        return array_map(static fn (array $data) => Account::createFromData($data), $accounts);
     }
 
-    private function request(string $action, string ...$arguments): array
+    public function liveMatch(int $playerId): array
+    {
+        $statuses = $this->request('getplayerstatus', $playerId);
+        $status = reset($statuses);
+
+        if ($matchId = $status['Match']) {
+            $players = $this->request('getmatchplayerdetails', $matchId);
+
+            return array_map(static fn (array $data) => Player::createFromData($data), $players);
+        }
+
+        return [];
+    }
+
+    public function searchAccountInfo(array $playerIds): array
+    {
+        if (!$playerIds) {
+            return [];
+        }
+
+        return array_map(function (int $playerId) {
+            $data = $this->request('getplayer', $playerId);
+
+            return AccountInfo::createFromData($data);
+        }, $playerIds);
+    }
+
+    private function request(string $action, string|int ...$arguments): array
     {
         if ($action !== 'createsession') {
             $this->checkSession();
