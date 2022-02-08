@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="GUpHQuo" resname="match_details.god">
+        <source>match_details.god</source>
+        <target>God</target>
+      </trans-unit>
+      <trans-unit id="USSOwY9" resname="match_details.name">
+        <source>match_details.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="u1YcR1J" resname="match_details.level">
+        <source>match_details.level</source>
+        <target>Level</target>
+      </trans-unit>
+      <trans-unit id="XUhdWGx" resname="match_details.not_found">
+        <source>match_details.not_found</source>
+        <target>Match not found.</target>
+      </trans-unit>
+      <trans-unit id="NCeYxkN" resname="match_live.not_found">
+        <source>match_live.not_found</source>
+        <target>Player does not appear to be in a live match.</target>
+      </trans-unit>
+      <trans-unit id="1wSRW_I" resname="account_search.player_name">
+        <source>account_search.player_name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="NfX7yPu" resname="account_search.search">
+        <source>account_search.search</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="60ZJFFU" resname="account_search.no_accounts_found">
+        <source>account_search.no_accounts_found</source>
+        <target>No accounts found</target>
+      </trans-unit>
+      <trans-unit id="JcaAwYU" resname="account_search.multiple_accounts_found">
+        <source>account_search.multiple_accounts_found</source>
+        <target>Multiple accounts found</target>
+      </trans-unit>
+      <trans-unit id="x6bc5Df" resname="account_search.name">
+        <source>account_search.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="IhyFnw9" resname="account_search.hirez_name">
+        <source>account_search.hirez_name</source>
+        <target>Hi-Rez Name</target>
+      </trans-unit>
+      <trans-unit id="rq0JgpB" resname="account_search.platform">
+        <source>account_search.platform</source>
+        <target>Platform</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
