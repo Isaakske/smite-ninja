@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\API;
 
+use App\Common\Mapper;
 use App\Entity\Account;
 use App\Entity\AccountInfo;
+use App\Entity\MatchInfo;
 use App\Entity\Player;
+use App\Services\MatchHelper;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -15,15 +18,17 @@ class Smite
 {
     private SessionInterface $session;
     private HttpClientInterface $client;
+    private MatchHelper $matchHelper;
     private string $devId;
     private string $authKey;
 
     private string $baseUrl = 'https://api.smitegame.com/smiteapi.svc/';
 
-    public function __construct(RequestStack $requestStack, HttpClientInterface $client, string $devId, string $authKey)
+    public function __construct(RequestStack $requestStack, HttpClientInterface $client, MatchHelper $matchHelper, string $devId, string $authKey)
     {
         $this->session = $requestStack->getSession();
         $this->client = $client;
+        $this->matchHelper = $matchHelper;
         $this->devId = $devId;
         $this->authKey = $authKey;
     }
@@ -35,21 +40,45 @@ class Smite
         return array_map(static fn (array $data) => Account::createFromData($data), $accounts);
     }
 
-    public function liveMatch(int $playerId): array
+    public function liveMatch(int $playerId): ?MatchInfo
     {
         $statuses = $this->request('getplayerstatus', $playerId);
         $status = reset($statuses);
 
         if ($matchId = $status['Match']) {
-            $players = $this->request('getmatchplayerdetails', $matchId);
+            $info = $this->request('getmatchplayerdetails', $matchId);
 
-            return array_map(static fn (array $data) => Player::createFromData($data), $players);
+            return $this->matchHelper->createMatchWithTeams($info);
         }
 
-        return [];
+        return null;
     }
 
-    public function searchAccountInfo(array $playerIds): array
+    public function matchDetails(int $matchId): ?MatchInfo
+    {
+        $info = $this->request('getmatchdetails', $matchId);
+
+        return $this->matchHelper->createMatchWithTeams($info);
+    }
+
+    public function fillPlayersWithAccountInfo(array $players): void
+    {
+        $knownPlayers = array_filter($players, static fn (Player $player) => $player->getId());
+        $playerIds = array_map(static fn (Player $player) => $player->getId(), $knownPlayers);
+        $accountInfo = $this->searchAccountInfo($playerIds);
+        $accountInfo = Mapper::mapObjects($accountInfo, static fn (AccountInfo $accountInfo) => $accountInfo->getId());
+
+        /** @var Player $player */
+        foreach ($players as $player) {
+            $id = $player->getId();
+
+            if (array_key_exists($id, $accountInfo)) {
+                $player->setAccountInfo($accountInfo[$id]);
+            }
+        }
+    }
+
+    private function searchAccountInfo(array $playerIds): array
     {
         if (!$playerIds) {
             return [];
@@ -58,7 +87,7 @@ class Smite
         return array_map(function (int $playerId) {
             $data = $this->request('getplayer', $playerId);
 
-            return AccountInfo::createFromData($data);
+            return AccountInfo::createFromData(reset($data));
         }, $playerIds);
     }
 
@@ -73,12 +102,12 @@ class Smite
 
         // createsession = devId + signature + timestamp
         // others = devId + signature + sessionId + timestamp + arguments
-        $arguments = array_merge([$timestamp], $arguments);
+        $arguments = array_merge([$this->devId, $signature, $timestamp], $arguments);
         if ($sessionId = $this->session->get('session_id')) {
-            array_unshift($arguments, $sessionId);
+            array_splice($arguments, 2, 0, $sessionId);
         }
 
-        $url = $this->baseUrl . $action . "json/{$this->devId}/{$signature}/" . implode('/', $arguments);
+        $url = $this->baseUrl . $action . 'json/' . implode('/', $arguments);
 
         $response = $this->client->request('GET', $url);
 
@@ -95,7 +124,6 @@ class Smite
         }
 
         $this->session->remove('session_id');
-        $this->session->remove('session_ttl');
 
         $result = $this->request('createsession');
 

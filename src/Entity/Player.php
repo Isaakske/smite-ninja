@@ -16,7 +16,7 @@ class Player
     public function __construct(int $id, string $name, int $level, int $team, string $god)
     {
         $this->id = $id;
-        $this->name = $name;
+        $this->setName($name);
         $this->level = $level;
         $this->team = $team;
         $this->god = $god;
@@ -24,7 +24,13 @@ class Player
 
     public static function createFromData(array $data): self
     {
-        return new self((int) $data['playerId'], $data['playerName'], (int) $data['Account_Level'], (int) $data['taskForce'], $data['GodName']);
+        return new self(
+            (int) $data['playerId'],
+            $data['playerName'],
+            (int) $data['Account_Level'],
+            (int) ($data['TaskForce'] ?? $data['taskForce']),
+            $data['Reference_Name'] ?? $data['GodName']
+        );
     }
 
     public function getId(): int
@@ -44,6 +50,10 @@ class Player
 
     public function setName(string $name): void
     {
+        if (str_contains($name, ']')) {
+            $name = str_replace(']', '] ', $name);
+        }
+
         $this->name = $name;
     }
 

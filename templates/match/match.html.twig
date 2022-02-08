@@ -1,0 +1,31 @@
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>{{ 'match_details.god'|trans }}</th>
+        <th>{{ 'match_details.name'|trans }}</th>
+        <th>{{ 'match_details.level'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for id, team in match.teams %}
+        {% if not loop.first %}
+            <tr><td colspan="3" /></tr>
+        {% endif %}
+        {% for player in team %}
+            <tr
+                {% if match.winner is not null %}
+                    {% if id == match.winner %}
+                        class="table-success"
+                    {% else %}
+                        class="table-danger"
+                    {% endif %}
+                {% endif %}
+            >
+                <td>{{ player.god }}</td>
+                <td>{{ player.name }}</td>
+                <td>{{ player.level }}</td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+    </tbody>
+</table>

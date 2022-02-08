@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="match-live">
+    <div class="match-details">
         {% if not match %}
             <div class="alert alert-danger">
-                {{ 'match_live.not_found'|trans }}
+                {{ 'match_details.not_found'|trans }}
             </div>
         {% endif %}
 

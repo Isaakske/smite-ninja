@@ -3,10 +3,7 @@ html, body {
     height: 100%;
 }
 
-.match-live, .account-search {
-    width: 100%;
-    height: 100%;
-
+body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,12 +12,26 @@ html, body {
     > div, > form {
         width: 50%;
     }
-}
 
-.multiple-accounts {
-    margin-top: 25px;
-}
+    form {
+        text-align: center;
+    }
 
-form, .multiple-accounts-title {
-    text-align: center;
+    .extra-info {
+        margin-top: 25px;
+
+        .alert {
+            text-align: center;
+        }
+    }
+
+    > .match-details, > .match-live {
+        width: 75%;
+
+        .alert {
+            width: 67%; // to get roughly 50% of the parent
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
 }
