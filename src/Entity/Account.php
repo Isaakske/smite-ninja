@@ -21,7 +21,7 @@ class Account
 
     public static function createFromData(array $data): self
     {
-        return new self((int) $data['player_id'], $data['Name'], $data['hz_player_name'], Portal::fromIdentifier((int) $data['portal_id']));
+        return new self((int) $data['player_id'], $data['Name'], $data['hz_player_name'] ?? '', Portal::fromIdentifier((int) $data['portal_id']));
     }
 
     public function getId(): int
