@@ -19,6 +19,8 @@ body {
 
     .extra-info {
         margin-top: 25px;
+        max-height: 50vh;
+        overflow-y: auto;
 
         .alert {
             text-align: center;
