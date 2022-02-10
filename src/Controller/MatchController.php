@@ -23,6 +23,7 @@ class MatchController extends AbstractController
 
         return [
             'match' => $match,
+            'player' => $playerId,
         ];
     }
 

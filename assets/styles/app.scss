@@ -28,6 +28,10 @@ body {
     > .match-details, > .match-live {
         width: 75%;
 
+        .table-bold {
+            font-weight: bold;
+        }
+
         .alert {
             width: 67%; // to get roughly 50% of the parent
             margin-left: auto;

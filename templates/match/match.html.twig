@@ -12,17 +12,21 @@
             <tr><td colspan="3" /></tr>
         {% endif %}
         {% for player in team %}
-            <tr
-                {% if match.winner is not null %}
-                    {% if id == match.winner %}
-                        class="table-success"
-                    {% else %}
-                        class="table-danger"
-                    {% endif %}
+            {% if match.winner is not null %}
+                {% if id == match.winner %}
+                    {% set class = "table-success" %}
+                {% else %}
+                    {% set class = "table-danger" %}
                 {% endif %}
-            >
+            {% endif %}
+
+            {% if currentPlayer is defined and player.id == currentPlayer %}
+                {% set class = "table-bold" %}
+            {% endif %}
+
+            <tr {% if class %}class="{{ class }}"{% endif %}>
                 <td>{{ player.god }}</td>
-                <td>{{ player.name }}</td>
+                <td><a href="{{ path('player_profile', { 'playerId': player.id }) }}">{{ player.name }}</a></td>
                 <td>{{ player.level }}</td>
             </tr>
         {% endfor %}

@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="NCeYxkN" resname="match_live.not_found">
         <source>match_live.not_found</source>
-        <target>Player does not appear to be in a live match.</target>
+        <target><![CDATA[Player does not appear to be in a live match. Click <a href="%profile%">here</a> to visit their profile.]]></target>
       </trans-unit>
       <trans-unit id="1wSRW_I" resname="account_search.player_name">
         <source>account_search.player_name</source>
