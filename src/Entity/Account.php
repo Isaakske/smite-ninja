@@ -9,9 +9,9 @@ class Account
     private int $id;
     private string $name;
     private string $hirezName;
-    private Portal $portal;
+    private int $portal;
 
-    public function __construct(int $id, string $name, string $hirezName, Portal $portal)
+    public function __construct(int $id, string $name, string $hirezName, int $portal)
     {
         $this->id = $id;
         $this->name = $name;
@@ -21,7 +21,12 @@ class Account
 
     public static function createFromData(array $data): self
     {
-        return new self((int) $data['player_id'], $data['Name'], $data['hz_player_name'] ?? '', Portal::fromIdentifier((int) $data['portal_id']));
+        return new self(
+            (int) $data['player_id'],
+            $data['Name'],
+            $data['hz_player_name'] ?? '',
+            (int) $data['portal_id']
+        );
     }
 
     public function getId(): int
@@ -54,12 +59,12 @@ class Account
         $this->hirezName = $hirezName;
     }
 
-    public function getPortal(): Portal
+    public function getPortal(): int
     {
         return $this->portal;
     }
 
-    public function setPortal(Portal $portal): void
+    public function setPortal(int $portal): void
     {
         $this->portal = $portal;
     }

@@ -35,7 +35,7 @@
                             <tr>
                                 <td><a href="{{ path('match_live', {'playerId': account.id}) }}">{{ account.name }}</a></td>
                                 <td>{{ account.hirezName }}</td>
-                                <td>{{ account.portal.name }}</td>
+                                <td>{{ portal_name(account.portal) }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
