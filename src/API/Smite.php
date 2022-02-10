@@ -33,7 +33,7 @@ class Smite
         $this->authKey = $authKey;
     }
 
-    public function searchAccounts(string $accountName): array
+    public function accounts(string $accountName): array
     {
         $accounts = $this->request('searchplayers', $accountName);
 
@@ -65,7 +65,7 @@ class Smite
     {
         $knownPlayers = array_filter($players, static fn (Player $player) => $player->getId());
         $playerIds = array_map(static fn (Player $player) => $player->getId(), $knownPlayers);
-        $accountInfo = $this->searchAccountInfo($playerIds);
+        $accountInfo = $this->accountInfo($playerIds);
         $accountInfo = Mapper::mapObjects($accountInfo, static fn (AccountInfo $accountInfo) => $accountInfo->getId());
 
         /** @var Player $player */
@@ -78,7 +78,7 @@ class Smite
         }
     }
 
-    private function searchAccountInfo(array $playerIds): array
+    public function accountInfo(array $playerIds): array
     {
         if (!$playerIds) {
             return [];

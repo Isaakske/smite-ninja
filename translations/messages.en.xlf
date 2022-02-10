@@ -69,6 +69,38 @@
         <source>match_live.match_details</source>
         <target>Match Details</target>
       </trans-unit>
+      <trans-unit id="0NrO_xl" resname="player_profile.not_found">
+        <source>player_profile.not_found</source>
+        <target>Player not found.</target>
+      </trans-unit>
+      <trans-unit id="X_lY_Lp" resname="player_profile.name">
+        <source>player_profile.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="Iyu4DWo" resname="player_profile.level">
+        <source>player_profile.level</source>
+        <target>Level</target>
+      </trans-unit>
+      <trans-unit id="gWJjs.c" resname="player_profile.rank">
+        <source>player_profile.rank</source>
+        <target>Rank</target>
+      </trans-unit>
+      <trans-unit id="dtBNdhs" resname="player_profile.mmr">
+        <source>player_profile.mmr</source>
+        <target>MMR</target>
+      </trans-unit>
+      <trans-unit id="pWP3w2c" resname="player_profile.win_loss">
+        <source>player_profile.win_loss</source>
+        <target>Win/Loss</target>
+      </trans-unit>
+      <trans-unit id="fCuMwbh" resname="player_profile.ratio">
+        <source>player_profile.ratio</source>
+        <target>Win/Loss Ratio</target>
+      </trans-unit>
+      <trans-unit id="RlHn_f9" resname="match_details.ranked">
+        <source>match_details.ranked</source>
+        <target>Ranked</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

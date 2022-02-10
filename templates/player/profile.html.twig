@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="player-profile">
+        {% if not account %}
+            <div class="alert alert-danger">
+                {{ 'player_profile.not_found'|trans }}
+            </div>
+        {% endif %}
+
+        {% if account %}
+            <p>{{ 'player_profile.name'|trans }}: {{ account.name }}</p>
+            <p>{{ 'player_profile.level'|trans }}: {{ account.level }}</p>
+            <p>{{ 'player_profile.rank'|trans }}: {{ rank_name(account.rank) }}</p>
+            {% if account.rank %}
+                <p>{{ 'player_profile.mmr'|trans }}: {{ account.mmr }}</p>
+                <p>{{ 'player_profile.win_loss'|trans }}: {{ account.wins }} - {{ account.losses }}</p>
+                <p>{{ 'player_profile.ratio'|trans }}: {{ account.ratio }}%</p>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

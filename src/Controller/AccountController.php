@@ -29,7 +29,7 @@ class AccountController extends AbstractController
             if ($form->isSubmitted() && $form->isValid() && ($accountName = $data->getAccountName())) {
                 $cookie = Cookie::create('account_name', $accountName, new \DateTime('+14 days'));
 
-                $accounts = $smite->searchAccounts($accountName);
+                $accounts = $smite->accounts($accountName);
 
                 $matchingAccounts = array_filter($accounts, static fn (Account $account) => $account->getName() === $accountName);
 
