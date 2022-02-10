@@ -53,6 +53,22 @@
         <source>account_search.platform</source>
         <target>Platform</target>
       </trans-unit>
+      <trans-unit id="5VJ6vOx" resname="match_details.rank">
+        <source>match_details.rank</source>
+        <target>Rank</target>
+      </trans-unit>
+      <trans-unit id="twWuQbn" resname="match_details.mmr">
+        <source>match_details.mmr</source>
+        <target>MMR</target>
+      </trans-unit>
+      <trans-unit id="UdjJ35T" resname="match_details.win_loss">
+        <source>match_details.win_loss</source>
+        <target>Win/Loss</target>
+      </trans-unit>
+      <trans-unit id="KECET2m" resname="match_live.match_details">
+        <source>match_live.match_details</source>
+        <target>Match Details</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
