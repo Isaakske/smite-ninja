@@ -2,6 +2,7 @@
 <table class="table table-bordered">
     <thead>
     <tr>
+        <th>{{ 'match_details.rank'|trans }}</th>
         <th>{{ 'match_details.god'|trans }}</th>
         <th>{{ 'match_details.name'|trans }}</th>
         <th>{{ 'match_details.level'|trans }}</th>
@@ -26,6 +27,15 @@
             {% endif %}
 
             <tr {% if class %}class="{{ class }}"{% endif %}>
+                <td>
+                    {% if player.accountInfo %}
+                        {{ 'match_details.rank'|trans }}: {{ rank_name(player.accountInfo.rank) }}
+                        {% if player.accountInfo.rank %}
+                            <br>{{ 'match_details.mmr'|trans }}: {{ player.accountInfo.mmr }}
+                            <br>{{ 'match_details.win_loss'|trans }}: {{ player.accountInfo.wins }} - {{ player.accountInfo.losses }} ({{ player.accountInfo.ratio }}%)
+                        {% endif %}
+                    {% endif %}
+                </td>
                 <td>{{ player.god }}</td>
                 <td><a href="{{ path('player_profile', { 'playerId': player.id }) }}">{{ player.name }}</a></td>
                 <td>{{ player.level }}</td>
