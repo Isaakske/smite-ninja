@@ -28,8 +28,16 @@ body {
     > .match-details, > .match-live {
         width: 75%;
 
+        h3 {
+            text-align: center;
+        }
+
         .table-bold {
             font-weight: bold;
+        }
+
+        .btn-wrapper {
+            text-align: center;
         }
 
         .alert {

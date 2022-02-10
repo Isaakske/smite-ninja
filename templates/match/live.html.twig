@@ -11,9 +11,11 @@
         {% if match %}
             {% include 'match/match.html.twig' with { 'currentPlayer': player } %}
 
-            <a href="{{ path('match_details', { 'matchId': match.id }) }}" class="btn btn-primary">
-                {{ 'match_live.match_details'|trans }}
-            </a>
+            <div class="btn-wrapper">
+                <a href="{{ path('match_details', { 'matchId': match.id }) }}" class="btn btn-primary">
+                    {{ 'match_live.match_details'|trans }}
+                </a>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

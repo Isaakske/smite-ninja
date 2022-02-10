@@ -13,6 +13,7 @@ class NameExtension extends AbstractExtension
     {
         return [
             new TwigFunction('portal_name', [$this, 'getPortalName']),
+            new TwigFunction('mode_name', [$this, 'getModeName']),
         ];
     }
 
@@ -26,6 +27,13 @@ class NameExtension extends AbstractExtension
             case 22: return 'Nintendo';
             case 25: return 'Discord';
             case 28: return 'Epic Games';
+            default: return 'Unknown';
+        }
+    }
+
+    public function getModeName(int $mode): string
+    {
+        switch ($mode) {
             default: return 'Unknown';
         }
     }
