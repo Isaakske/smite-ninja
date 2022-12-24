@@ -133,6 +133,18 @@
         <source>match_details.hidden</source>
         <target>Hidden</target>
       </trans-unit>
+      <trans-unit id="fuYbPgf" resname="match_details.account">
+        <source>match_details.account</source>
+        <target>Account</target>
+      </trans-unit>
+      <trans-unit id="7jUpIjY" resname="match_details.mastery_level">
+        <source>match_details.mastery_level</source>
+        <target>Mastery Level</target>
+      </trans-unit>
+      <trans-unit id="eJZz.dR" resname="match_details.created">
+        <source>match_details.created</source>
+        <target>Account Created</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

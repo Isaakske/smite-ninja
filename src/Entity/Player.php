@@ -11,16 +11,17 @@ class Player
     private int $level;
     private int $team;
     private string $god;
+    private ?int $godLevel;
     private ?AccountInfo $accountInfo;
 
-    public function __construct(int $id, string $name, int $level, int $team, string $god, array $data = [])
+    public function __construct(int $id, string $name, int $level, int $team, string $god, ?int $godLevel, array $data = [])
     {
         $this->id = $id;
-        $this->setName($name);
+        $this->name = $name;
         $this->level = $level;
         $this->team = $team;
         $this->god = $god;
-
+        $this->godLevel = $godLevel;
         $this->accountInfo = AccountInfo::createFromData($data);
     }
 
@@ -32,6 +33,7 @@ class Player
             (int) $data['Account_Level'],
             (int) ($data['TaskForce'] ?? $data['taskForce']),
             $data['Reference_Name'] ?? $data['GodName'],
+            array_key_exists('GodLevel', $data) ? (int) $data['GodLevel'] : null,
             $data
         );
     }
@@ -53,10 +55,6 @@ class Player
 
     public function setName(string $name): void
     {
-        if (str_contains($name, ']')) {
-            $name = str_replace(']', '] ', $name);
-        }
-
         $this->name = $name;
     }
 
@@ -88,6 +86,16 @@ class Player
     public function setGod(string $god): void
     {
         $this->god = $god;
+    }
+
+    public function getGodLevel(): ?int
+    {
+        return $this->godLevel;
+    }
+
+    public function setGodLevel(?int $godLevel): void
+    {
+        $this->godLevel = $godLevel;
     }
 
     public function getAccountInfo(): ?AccountInfo

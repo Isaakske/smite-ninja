@@ -14,9 +14,11 @@ class AccountInfo
     private int $wins;
     private int $losses;
     private int $ratio;
+    private int $masteryLevel;
+    private ?\DateTime $createdAt;
     private ?int $status;
 
-    public function __construct(int $id, string $name, int $level, int $rank, int $mmr, int $wins, int $losses, int $ratio, int $status = null)
+    public function __construct(int $id, string $name, int $level, int $rank, int $mmr, int $wins, int $losses, int $ratio, int $masteryLevel, ?\DateTime $createdAt, ?int $status)
     {
         $this->id = $id;
         $this->name = $name;
@@ -26,6 +28,8 @@ class AccountInfo
         $this->wins = $wins;
         $this->losses = $losses;
         $this->ratio = $ratio;
+        $this->masteryLevel = $masteryLevel;
+        $this->createdAt = $createdAt;
         $this->status = $status;
     }
 
@@ -40,6 +44,12 @@ class AccountInfo
         $losses = (int) ($data['RankedConquest']['Losses'] ?? $data['Conquest_Losses'] ?? $data['tierLosses']);
         $total = $wins + $losses;
 
+        $date = $data['Created_Datetime'] ?? $data['playerCreated'] ?? null;
+        if ($date) {
+            $parts = explode(' ', $date);
+            $date = reset($parts);
+        }
+
         return new self(
             (int) ($data['Id'] ?? $data['playerId']),
             $data['hz_player_name'] ?? $data['playerName'],
@@ -49,6 +59,8 @@ class AccountInfo
             $wins,
             $losses,
             $total ? (int) round(($wins / $total) * 100) : 0,
+            (int) ($data['Account_Gods_Played'] ?? $data['Mastery_Level'] ?? $data['MasteryLevel']),
+            $date ? \DateTime::createFromFormat('n/j/Y', $date) : null,
             array_key_exists('status', $data) ? (int) $data['status'] : null
         );
     }
@@ -135,6 +147,26 @@ class AccountInfo
     public function setRatio(int $ratio): void
     {
         $this->ratio = $ratio;
+    }
+
+    public function getMasteryLevel(): int
+    {
+        return $this->masteryLevel;
+    }
+
+    public function setMasteryLevel(int $masteryLevel): void
+    {
+        $this->masteryLevel = $masteryLevel;
+    }
+
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTime $createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 
     public function getStatus(): ?int

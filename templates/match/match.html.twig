@@ -5,7 +5,7 @@
         <th>{{ 'match_details.ranked'|trans }}</th>
         <th>{{ 'match_details.god'|trans }}</th>
         <th>{{ 'match_details.name'|trans }}</th>
-        <th>{{ 'match_details.level'|trans }}</th>
+        <th>{{ 'match_details.account'|trans }}</th>
     </tr>
     </thead>
     <tbody>
@@ -46,7 +46,12 @@
                         {% endif %}
                     {% endif %}
                 </td>
-                <td>{{ player.god }}</td>
+                <td>
+                    {{ player.god }}
+                    {% if player.godLevel %}
+                        <br>{{ 'match_details.mastery_level'|trans }}: {{ player.godLevel }}
+                    {% endif %}
+                </td>
                 <td>
                     {% if player.id %}
                         <a href="{{ path('player_profile', { 'playerId': player.id }) }}">{{ player.name }}</a>
@@ -54,7 +59,13 @@
                         <span class="text-warning">{{ 'match_details.hidden'|trans }}</span>
                     {% endif %}
                 </td>
-                <td>{{ player.level }}</td>
+                <td>
+                    {{ 'match_details.level'|trans }}: {{ player.accountInfo.level }}
+                    <br>{{ 'match_details.mastery_level'|trans }}: {{ player.accountInfo.masteryLevel }}
+                    {% if player.accountInfo.createdAt %}
+                        <br>{{ 'match_details.created'|trans }}: {{ player.accountInfo.createdAt|date('d/m/Y') }}
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
     {% endfor %}
