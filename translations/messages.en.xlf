@@ -109,6 +109,18 @@
         <source>account_search.recent_searches</source>
         <target>Recent Searches</target>
       </trans-unit>
+      <trans-unit id="kA8yDNB" resname="match_details.title">
+        <source>match_details.title</source>
+        <target>Match Details</target>
+      </trans-unit>
+      <trans-unit id="GJ8NfZL" resname="match_live.title">
+        <source>match_live.title</source>
+        <target>Live Match</target>
+      </trans-unit>
+      <trans-unit id="5x5K0rs" resname="account_search.title">
+        <source>account_search.title</source>
+        <target>Player Lookup</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

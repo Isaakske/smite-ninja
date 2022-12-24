@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    {{ 'match_details.title'|trans }}
+{% endblock %}
+
 {% block body %}
     <div class="match-details">
         {% if not match %}
