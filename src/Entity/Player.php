@@ -33,7 +33,7 @@ class Player
             (int) $data['Account_Level'],
             (int) ($data['TaskForce'] ?? $data['taskForce']),
             $data['Reference_Name'] ?? $data['GodName'],
-            array_key_exists('GodLevel', $data) ? (int) $data['GodLevel'] : null,
+            array_key_exists('GodLevel', $data) ? ((int) $data['GodLevel']) - 1 : null,
             $data
         );
     }
