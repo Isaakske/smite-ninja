@@ -9,7 +9,7 @@ use Twig\TwigFunction;
 
 class NameExtension extends AbstractExtension
 {
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('portal_name', [$this, 'getPortalName']),

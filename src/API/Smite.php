@@ -114,7 +114,7 @@ class Smite
         return json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
     }
 
-    private function checkSession()
+    private function checkSession(): void
     {
         if (
             $this->session->get('session_id')

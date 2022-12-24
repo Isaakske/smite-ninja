@@ -101,6 +101,10 @@
         <source>match_details.ranked</source>
         <target>Ranked</target>
       </trans-unit>
+      <trans-unit id="I8LdKAp" resname="dark_mode">
+        <source>dark_mode</source>
+        <target>Dark Mode</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

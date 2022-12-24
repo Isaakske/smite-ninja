@@ -10,3 +10,16 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+import $ from "jquery";
+import Cookies from 'js-cookie';
+
+$('body')
+    .on('change', '#darkModeSwitch', function () {
+        const isDark = $(this).is(':checked');
+        const $html = $('html');
+
+        $html.toggleClass('light', !isDark);
+        $html.toggleClass('dark', isDark);
+        Cookies.set('theme', isDark ? 'dark' : 'light', { expires: 365 });
+    })
+;
