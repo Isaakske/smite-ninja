@@ -11,15 +11,17 @@ class Player
     private int $level;
     private int $team;
     private string $god;
-    private ?AccountInfo $accountInfo = null;
+    private ?AccountInfo $accountInfo;
 
-    public function __construct(int $id, string $name, int $level, int $team, string $god)
+    public function __construct(int $id, string $name, int $level, int $team, string $god, array $data = [])
     {
         $this->id = $id;
         $this->setName($name);
         $this->level = $level;
         $this->team = $team;
         $this->god = $god;
+
+        $this->accountInfo = AccountInfo::createFromData($data);
     }
 
     public static function createFromData(array $data): self
@@ -29,7 +31,8 @@ class Player
             $data['hz_player_name'] ?? $data['playerName'],
             (int) $data['Account_Level'],
             (int) ($data['TaskForce'] ?? $data['taskForce']),
-            $data['Reference_Name'] ?? $data['GodName']
+            $data['Reference_Name'] ?? $data['GodName'],
+            $data
         );
     }
 

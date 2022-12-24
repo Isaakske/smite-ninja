@@ -15,8 +15,7 @@ class PlayerController extends AbstractController
     #[Template]
     public function profile(int $playerId, Smite $smite): array
     {
-        $accountInfos = $smite->accountInfo([$playerId]);
-        $accountInfo = reset($accountInfos);
+        $accountInfo = $smite->accountInfo($playerId);
 
         return [
             'account' => $accountInfo,

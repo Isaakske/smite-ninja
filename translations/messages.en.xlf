@@ -125,6 +125,10 @@
         <source>player_profile.status</source>
         <target>Status</target>
       </trans-unit>
+      <trans-unit id="IQEambl" resname="player_profile.title">
+        <source>player_profile.title</source>
+        <target>Player Profile</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -61,35 +61,12 @@ class Smite
         return $this->matchHelper->createMatchWithTeams($info);
     }
 
-    public function fillPlayersWithAccountInfo(array $players): void
+    public function accountInfo(int $playerId): AccountInfo
     {
-        $knownPlayers = array_filter($players, static fn (Player $player) => $player->getId());
-        $playerIds = array_map(static fn (Player $player) => $player->getId(), $knownPlayers);
-        $accountInfo = $this->accountInfo($playerIds);
-        $accountInfo = Mapper::mapObjects($accountInfo, static fn (AccountInfo $accountInfo) => $accountInfo->getId());
+        $data = $this->request('getplayer', $playerId);
+        $statusData = $this->request('getplayerstatus', $playerId);
 
-        /** @var Player $player */
-        foreach ($players as $player) {
-            $id = $player->getId();
-
-            if (array_key_exists($id, $accountInfo)) {
-                $player->setAccountInfo($accountInfo[$id]);
-            }
-        }
-    }
-
-    public function accountInfo(array $playerIds): array
-    {
-        if (!$playerIds) {
-            return [];
-        }
-
-        return array_map(function (int $playerId) {
-            $data = $this->request('getplayer', $playerId);
-            $statusData = $this->request('getplayerstatus', $playerId);
-
-            return AccountInfo::createFromData((array) array_merge(reset($data), reset($statusData)));
-        }, $playerIds);
+        return AccountInfo::createFromData((array) array_merge(reset($data), reset($statusData)));
     }
 
     private function request(string $action, string|int ...$arguments): array

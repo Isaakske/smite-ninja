@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    {{ 'player_profile.title'|trans }}
+{% endblock %}
+
 {% block body %}
     <div class="player-profile">
         {% if not account %}

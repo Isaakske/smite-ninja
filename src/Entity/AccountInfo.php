@@ -14,9 +14,9 @@ class AccountInfo
     private int $wins;
     private int $losses;
     private int $ratio;
-    private int $status;
+    private ?int $status;
 
-    public function __construct(int $id, string $name, int $level, int $rank, int $mmr, int $wins, int $losses, int $ratio, int $status)
+    public function __construct(int $id, string $name, int $level, int $rank, int $mmr, int $wins, int $losses, int $ratio, int $status = null)
     {
         $this->id = $id;
         $this->name = $name;
@@ -29,22 +29,27 @@ class AccountInfo
         $this->status = $status;
     }
 
-    public static function createFromData(array $data): self
+    public static function createFromData(array $data): ?self
     {
-        $wins = (int) $data['RankedConquest']['Wins'];
-        $losses = (int) $data['RankedConquest']['Losses'];
+        if (!$data) {
+            return null;
+        }
+
+        // AccountInfo ?? MatchDetails ?? LiveMatch
+        $wins = (int) ($data['RankedConquest']['Wins'] ?? $data['Conquest_Wins'] ?? $data['tierWins']);
+        $losses = (int) ($data['RankedConquest']['Losses'] ?? $data['Conquest_Losses'] ?? $data['tierLosses']);
         $total = $wins + $losses;
 
         return new self(
-            (int) $data['Id'],
-            $data['hz_player_name'],
-            (int) $data['Level'],
-            (int) $data['RankedConquest']['Tier'],
-            (int) $data['RankedConquest']['Rank_Stat'],
+            (int) ($data['Id'] ?? $data['playerId']),
+            $data['hz_player_name'] ?? $data['playerName'],
+            (int) ($data['Level'] ?? $data['Account_Level']),
+            (int) ($data['RankedConquest']['Tier'] ?? $data['Conquest_Tier'] ?? $data['Tier']),
+            (int) ($data['RankedConquest']['Rank_Stat'] ?? $data['Rank_Stat_Conquest'] ?? $data['Rank_Stat']),
             $wins,
             $losses,
             $total ? (int) round(($wins / $total) * 100) : 0,
-            (int) $data['status']
+            array_key_exists('status', $data) ? (int) $data['status'] : null
         );
     }
 
@@ -132,12 +137,12 @@ class AccountInfo
         $this->ratio = $ratio;
     }
 
-    public function getStatus(): int
+    public function getStatus(): ?int
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): void
+    public function setStatus(?int $status): void
     {
         $this->status = $status;
     }

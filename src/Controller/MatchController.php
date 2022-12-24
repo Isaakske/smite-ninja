@@ -17,10 +17,6 @@ class MatchController extends AbstractController
     {
         $match = $smite->liveMatch($playerId);
 
-        if ($match) {
-            $smite->fillPlayersWithAccountInfo($match->getPlayers());
-        }
-
         return [
             'match' => $match,
             'player' => $playerId,
@@ -32,10 +28,6 @@ class MatchController extends AbstractController
     public function details(int $matchId, Smite $smite): array
     {
         $match = $smite->matchDetails($matchId);
-
-        if ($match) {
-            $smite->fillPlayersWithAccountInfo($match->getPlayers());
-        }
 
         return [
             'match' => $match,
