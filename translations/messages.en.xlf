@@ -129,6 +129,10 @@
         <source>player_profile.title</source>
         <target>Player Profile</target>
       </trans-unit>
+      <trans-unit id="sR9xXMc" resname="match_details.hidden">
+        <source>match_details.hidden</source>
+        <target>Hidden</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
