@@ -59,6 +59,8 @@ class AccountInfo
             $wins,
             $losses,
             $total ? (int) round(($wins / $total) * 100) : 0,
+            // LiveMatch ?? MatchDetails ?? AccountInfo
+            // To avoid conflict in keys with different meaning
             (int) ($data['Account_Gods_Played'] ?? $data['Mastery_Level'] ?? $data['MasteryLevel']),
             $date ? \DateTime::createFromFormat('n/j/Y', $date) : null,
             array_key_exists('status', $data) ? (int) $data['status'] : null

@@ -20,6 +20,7 @@ class MatchHelper
         $match = MatchInfo::creareFromData($matchData);
 
         $players = array_map(static fn (array $data) => Player::createFromData($data), $info);
+        usort($players, static fn (Player $player1, Player $player2) => $player2->getAccountInfo()?->getMmr() <=> $player1->getAccountInfo()?->getMmr());
         $teams = Mapper::mapObjects($players, static fn (Player $player) => $player->getTeam(), static fn (Player $player) => [$player]);
 
         $match->setTeams($teams);
