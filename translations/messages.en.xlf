@@ -105,6 +105,10 @@
         <source>dark_mode</source>
         <target>Dark Mode</target>
       </trans-unit>
+      <trans-unit id="20jtIr_" resname="account_search.recent_searches">
+        <source>account_search.recent_searches</source>
+        <target>Recent Searches</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

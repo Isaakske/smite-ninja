@@ -19,40 +19,52 @@ class AccountController extends AbstractController
     #[Route('/', name: 'account_search', methods: ['GET', 'POST'])]
     public function search(Request $request, Smite $smite): Response
     {
+        $cookies = [];
         $data = new AccountSearchData($request->cookies->get('account_name'));
+        $recentSearches = explode(',', $request->cookies->get('recent_searches', ''));
+        $recentSearches = array_filter($recentSearches);
 
         $form = $this->createForm(AccountSearchType::class, $data);
 
-        if ($request->getMethod() === Request::METHOD_POST) {
-            $form->handleRequest($request);
+        if (
+            (
+                $request->getMethod() === Request::METHOD_POST
+                && $form->handleRequest($request)
+                && $form->isSubmitted()
+                && $form->isValid()
+                && ($accountName = $data->getAccountName())
+            )
+            || (
+                $request->getMethod() === Request::METHOD_GET
+                && ($accountName = $request->query->get('accountName'))
+            )
+        ) {
+            array_unshift($recentSearches, $accountName);
+            $cookies[] = Cookie::create('account_name', $accountName, new \DateTime('+14 days'));
+            $cookies[] = Cookie::create('recent_searches', implode(',', array_unique($recentSearches)), new \DateTime('+14 days'));
 
-            if ($form->isSubmitted() && $form->isValid() && ($accountName = $data->getAccountName())) {
-                $cookie = Cookie::create('account_name', $accountName, new \DateTime('+14 days'));
+            $accounts = $smite->accounts($accountName);
 
-                $accounts = $smite->accounts($accountName);
+            $matchingAccounts = array_filter($accounts, static fn (Account $account) => $account->getName() === $accountName);
 
-                $matchingAccounts = array_filter($accounts, static fn (Account $account) => $account->getName() === $accountName);
+            if (count($matchingAccounts) === 1) {
+                /** @var Account $account */
+                $account = reset($matchingAccounts);
 
-                if (count($matchingAccounts) === 1) {
-                    /** @var Account $account */
-                    $account = reset($matchingAccounts);
+                $response = $this->redirectToRoute('match_live', ['playerId' => $account->getId()]);
+                array_walk($cookies, static fn (Cookie $cookie) => $response->headers->setCookie($cookie));
 
-                    $response = $this->redirectToRoute('match_live', ['playerId' => $account->getId()]);
-                    $response->headers->setCookie($cookie);
-
-                    return $response;
-                }
+                return $response;
             }
         }
 
         $response = $this->render('account/search.html.twig', [
             'form' => $form->createView(),
             'accounts' => $accounts ?? null,
+            'recentSearches' => $recentSearches,
         ]);
 
-        if (isset($cookie)) {
-            $response->headers->setCookie($cookie);
-        }
+        array_walk($cookies, static fn (Cookie $cookie) => $response->headers->setCookie($cookie));
 
         return $response;
     }

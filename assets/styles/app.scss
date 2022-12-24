@@ -22,6 +22,10 @@ body {
         max-height: 50vh;
         overflow-y: auto;
 
+        &.recent-searches {
+            text-align: center;
+        }
+
         .alert {
             text-align: center;
         }
