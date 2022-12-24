@@ -86,8 +86,9 @@ class Smite
 
         return array_map(function (int $playerId) {
             $data = $this->request('getplayer', $playerId);
+            $statusData = $this->request('getplayerstatus', $playerId);
 
-            return AccountInfo::createFromData(reset($data));
+            return AccountInfo::createFromData((array) array_merge(reset($data), reset($statusData)));
         }, $playerIds);
     }
 

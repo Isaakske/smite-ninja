@@ -14,8 +14,9 @@ class AccountInfo
     private int $wins;
     private int $losses;
     private int $ratio;
+    private int $status;
 
-    public function __construct(int $id, string $name, int $level, int $rank, int $mmr, int $wins, int $losses, int $ratio)
+    public function __construct(int $id, string $name, int $level, int $rank, int $mmr, int $wins, int $losses, int $ratio, int $status)
     {
         $this->id = $id;
         $this->name = $name;
@@ -25,6 +26,7 @@ class AccountInfo
         $this->wins = $wins;
         $this->losses = $losses;
         $this->ratio = $ratio;
+        $this->status = $status;
     }
 
     public static function createFromData(array $data): self
@@ -35,13 +37,14 @@ class AccountInfo
 
         return new self(
             (int) $data['Id'],
-            $data['Name'],
+            $data['hz_player_name'],
             (int) $data['Level'],
             (int) $data['RankedConquest']['Tier'],
             (int) $data['RankedConquest']['Rank_Stat'],
             $wins,
             $losses,
-            $total ? (int) round(($wins / $total) * 100) : 0
+            $total ? (int) round(($wins / $total) * 100) : 0,
+            (int) $data['status']
         );
     }
 
@@ -127,5 +130,15 @@ class AccountInfo
     public function setRatio(int $ratio): void
     {
         $this->ratio = $ratio;
+    }
+
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
     }
 }

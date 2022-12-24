@@ -17,6 +17,17 @@
                 <p>{{ 'player_profile.win_loss'|trans }}: {{ account.wins }} - {{ account.losses }}</p>
                 <p>{{ 'player_profile.ratio'|trans }}: {{ account.ratio }}%</p>
             {% endif %}
+            <p>
+                {{ 'player_profile.status'|trans }}:&nbsp;
+                {% set status = status_name(account.status) %}
+                {% if account.status == 3 %}
+                    <a href="{{ path('match_live', { 'playerId': account.id }) }}">{{ status }}</a>
+                {% else %}
+                    <span class="{% if account.status %}text-success{% else %}text-danger{% endif %}">
+                        {{ status }}
+                    </span>
+                {% endif %}
+            </p>
         {% endif %}
     </div>
 {% endblock %}

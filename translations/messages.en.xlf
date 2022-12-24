@@ -121,6 +121,10 @@
         <source>account_search.title</source>
         <target>Player Lookup</target>
       </trans-unit>
+      <trans-unit id="1gVkE1n" resname="player_profile.status">
+        <source>player_profile.status</source>
+        <target>Status</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

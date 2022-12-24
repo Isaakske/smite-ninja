@@ -15,6 +15,7 @@ class NameExtension extends AbstractExtension
             new TwigFunction('portal_name', [$this, 'getPortalName']),
             new TwigFunction('mode_name', [$this, 'getModeName']),
             new TwigFunction('rank_name', [$this, 'getRankName']),
+            new TwigFunction('status_name', [$this, 'getStatusName']),
         ];
     }
 
@@ -82,6 +83,17 @@ class NameExtension extends AbstractExtension
             case 26: return 'Master';
             case 27: return 'Grandmaster';
             default: return 'Unknown';
+        }
+    }
+
+    public function getStatusName(int $status): string
+    {
+        switch ($status) {
+            case 1:
+            case 4: return 'Online';
+            case 2: return 'God Selection';
+            case 3: return 'In Game';
+            default: return 'Offline';
         }
     }
 }
