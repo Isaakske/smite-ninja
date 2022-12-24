@@ -26,7 +26,7 @@ class Player
     {
         return new self(
             (int) $data['playerId'],
-            $data['playerName'],
+            $data['hz_player_name'] ?? $data['playerName'],
             (int) $data['Account_Level'],
             (int) ($data['TaskForce'] ?? $data['taskForce']),
             $data['Reference_Name'] ?? $data['GodName']

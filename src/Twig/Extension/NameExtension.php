@@ -35,6 +35,17 @@ class NameExtension extends AbstractExtension
     public function getModeName(int $mode): string
     {
         switch ($mode) {
+            case 426: return 'Conquest';
+            case 435: return 'Arena';
+            case 448: return 'Joust';
+            case 445: return 'Assault';
+            case 10189: return 'Slash';
+            case 434: return 'MOTD';
+            case 504:
+            case 451: return 'Ranked Conquest';
+            case 503:
+            case 450: return 'Ranked Joust';
+            case 440: return 'Ranked Duel';
             default: return 'Unknown';
         }
     }
