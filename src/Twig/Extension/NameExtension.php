@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Twig\Extension;
 
+use App\Entity\Mode;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -33,9 +34,9 @@ class NameExtension extends AbstractExtension
         }
     }
 
-    public function getModeName(int $mode): string
+    public function getModeName(Mode $mode): string
     {
-        switch ($mode) {
+        switch ($mode->getId()) {
             case 426: return 'Conquest';
             case 435: return 'Arena';
             case 448: return 'Joust';
@@ -46,8 +47,9 @@ class NameExtension extends AbstractExtension
             case 451: return 'Ranked Conquest';
             case 503:
             case 450: return 'Ranked Joust';
+            case 502:
             case 440: return 'Ranked Duel';
-            default: return 'Unknown';
+            default: return $mode->getName() ?: 'Unknown';
         }
     }
 

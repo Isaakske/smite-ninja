@@ -7,11 +7,11 @@ namespace App\Entity;
 class MatchInfo
 {
     private int $id;
-    private int $mode;
+    private Mode $mode;
     private ?int $winner;
     private array $teams = [];
 
-    public function __construct(int $id, int $mode, ?int $winner)
+    public function __construct(int $id, Mode $mode, ?int $winner)
     {
         $this->id = $id;
         $this->mode = $mode;
@@ -22,7 +22,7 @@ class MatchInfo
     {
         return new self(
             (int) $data['Match'],
-            (int) ($data['Queue'] ?? $data['match_queue_id']),
+            Mode::createFromData($data),
             $data['Winning_TaskForce'] ?? null,
         );
     }
@@ -37,12 +37,12 @@ class MatchInfo
         $this->id = $id;
     }
 
-    public function getMode(): int
+    public function getMode(): Mode
     {
         return $this->mode;
     }
 
-    public function setMode(int $mode): void
+    public function setMode(Mode $mode): void
     {
         $this->mode = $mode;
     }
