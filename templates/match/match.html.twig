@@ -52,10 +52,19 @@
                     {% endif %}
                 </td>
                 <td>
-                    {{ player.god }}
-                    {% if player.godLevel %}
-                        <br>{{ player.godLevel }} &#9733;
-                    {% endif %}
+                    <div class="god">
+                        {% set icon = god_icon(player.god.id) %}
+                        {% if icon %}
+                            <img src="{{ icon }}" class="god-icon" />
+                        {% endif %}
+
+                        <div>
+                            {{ player.god.name }}
+                            {% if player.godLevel %}
+                                <br>{{ player.godLevel }} &#9733;
+                            {% endif %}
+                        </div>
+                    </div>
                 </td>
                 <td>
                     {% if player.id %}

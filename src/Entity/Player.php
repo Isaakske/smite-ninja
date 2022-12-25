@@ -10,11 +10,11 @@ class Player
     private string $name;
     private int $level;
     private int $team;
-    private string $god;
+    private God $god;
     private ?int $godLevel;
     private ?AccountInfo $accountInfo;
 
-    public function __construct(int $id, string $name, int $level, int $team, string $god, ?int $godLevel, array $data = [])
+    public function __construct(int $id, string $name, int $level, int $team, God $god, ?int $godLevel, ?AccountInfo $accountInfo)
     {
         $this->id = $id;
         $this->name = $name;
@@ -22,7 +22,7 @@ class Player
         $this->team = $team;
         $this->god = $god;
         $this->godLevel = $godLevel;
-        $this->accountInfo = AccountInfo::createFromData($data);
+        $this->accountInfo = $accountInfo;
     }
 
     public static function createFromData(array $data): self
@@ -32,9 +32,9 @@ class Player
             $data['hz_player_name'] ?? $data['playerName'],
             (int) $data['Account_Level'],
             (int) ($data['TaskForce'] ?? $data['taskForce']),
-            $data['Reference_Name'] ?? $data['GodName'],
+            God::createFromData($data),
             array_key_exists('GodLevel', $data) ? ((int) $data['GodLevel']) - 1 : null,
-            $data
+            AccountInfo::createFromData($data)
         );
     }
 
@@ -78,12 +78,12 @@ class Player
         $this->team = $team;
     }
 
-    public function getGod(): string
+    public function getGod(): God
     {
         return $this->god;
     }
 
-    public function setGod(string $god): void
+    public function setGod(God $god): void
     {
         $this->god = $god;
     }

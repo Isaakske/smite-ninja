@@ -28,6 +28,10 @@ services:
             $devId: '%env(DEV_ID)%'
             $authKey: '%env(AUTH_KEY)%'
 
+    App\Twig\Extension\IconExtension:
+        bind:
+            $cacheDir: '%kernel.cache_dir%'
+
     Twig\DeferredExtension\DeferredExtension:
         tags:
             - { name: twig.extension }

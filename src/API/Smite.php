@@ -6,6 +6,7 @@ namespace App\API;
 
 use App\Entity\Account;
 use App\Entity\AccountInfo;
+use App\Entity\God;
 use App\Entity\MatchInfo;
 use App\Services\MatchHelper;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -29,6 +30,13 @@ class Smite
         $this->matchHelper = $matchHelper;
         $this->devId = $devId;
         $this->authKey = $authKey;
+    }
+
+    public function gods(): array
+    {
+        $gods = $this->request('getgods', 1);
+
+        return array_map(static fn (array $data) => God::createFromData($data), $gods);
     }
 
     public function accounts(string $accountName): array
