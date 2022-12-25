@@ -153,6 +153,10 @@
         <source>base.title</source>
         <target>Welcome!</target>
       </trans-unit>
+      <trans-unit id="qKczhCj" resname="match_details.average">
+        <source>match_details.average</source>
+        <target>Average MMR</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

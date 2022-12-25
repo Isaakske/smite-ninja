@@ -49,7 +49,12 @@ class Smite
             return $this->matchHelper->createMatchWithTeams($info);
         }
 
-        return (int) $status['status'];
+        $status = (int) $status['status'];
+        if ($status === 2) {
+            return $status;
+        }
+
+        return null;
     }
 
     public function matchDetails(int $matchId): ?MatchInfo

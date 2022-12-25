@@ -10,9 +10,13 @@
     </thead>
     <tbody>
     {% for id, team in match.teams %}
+        {% set mmr = 0 %}
+        {% set classes = [] %}
+
         {% if not loop.first %}
-            <tr><td colspan="3" /></tr>
+            <tr><td colspan="4" /></tr>
         {% endif %}
+
         {% for player in team %}
             {% set classes = [] %}
 
@@ -41,6 +45,7 @@
                     {% if player.accountInfo %}
                         {{ 'match_details.rank'|trans }}: {{ rank_name(player.accountInfo.rank) }}
                         {% if player.accountInfo.rank %}
+                            {% set mmr = mmr + player.accountInfo.mmr %}
                             <br>{{ 'match_details.mmr'|trans }}: {{ player.accountInfo.mmr }}
                             <br>{{ 'match_details.win_loss'|trans }}: {{ player.accountInfo.wins }} - {{ player.accountInfo.losses }} ({{ player.accountInfo.ratio }}%)
                         {% endif %}
@@ -68,6 +73,12 @@
                 </td>
             </tr>
         {% endfor %}
+
+        {% if mmr %}
+            <tr class="{{ classes|join(' ') }} text-center">
+                <td colspan="4">{{ 'match_details.average'|trans }}: {{ (mmr/(team|length))|round }}</td>
+            </tr>
+        {% endif %}
     {% endfor %}
     </tbody>
 </table>
