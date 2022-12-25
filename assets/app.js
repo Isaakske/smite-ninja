@@ -23,3 +23,16 @@ $('body')
         Cookies.set('theme', isDark ? 'dark' : 'light', { expires: 365 });
     })
 ;
+
+if ($('[data-poll="1"]').length) {
+    const handler = setInterval(function () {
+        $.get(window.location, { poll: 1 }, function (response) {
+            if (response.hasOwnProperty('finished') && !response.finished) {
+                return;
+            }
+
+            $('body').html(response);
+            clearInterval(handler);
+        });
+    }, 10000);
+}

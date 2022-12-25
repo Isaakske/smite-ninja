@@ -145,6 +145,14 @@
         <source>match_details.created</source>
         <target>Account Created</target>
       </trans-unit>
+      <trans-unit id="TTweZBv" resname="match_live.god_selection">
+        <source>match_live.god_selection</source>
+        <target>Player is in God Selection. Waiting for match to start...</target>
+      </trans-unit>
+      <trans-unit id="if1CjXB" resname="base.title">
+        <source>base.title</source>
+        <target>Welcome!</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

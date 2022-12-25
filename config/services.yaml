@@ -27,3 +27,7 @@ services:
         bind:
             $devId: '%env(DEV_ID)%'
             $authKey: '%env(AUTH_KEY)%'
+
+    Twig\DeferredExtension\DeferredExtension:
+        tags:
+            - { name: twig.extension }

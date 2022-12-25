@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\API;
 
-use App\Common\Mapper;
 use App\Entity\Account;
 use App\Entity\AccountInfo;
 use App\Entity\MatchInfo;
-use App\Entity\Player;
 use App\Services\MatchHelper;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -40,7 +38,7 @@ class Smite
         return array_map(static fn (array $data) => Account::createFromData($data), $accounts);
     }
 
-    public function liveMatch(int $playerId): ?MatchInfo
+    public function liveMatch(int $playerId): MatchInfo|int|null
     {
         $statuses = $this->request('getplayerstatus', $playerId);
         $status = reset($statuses);
@@ -51,7 +49,7 @@ class Smite
             return $this->matchHelper->createMatchWithTeams($info);
         }
 
-        return null;
+        return (int) $status['status'];
     }
 
     public function matchDetails(int $matchId): ?MatchInfo

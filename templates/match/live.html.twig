@@ -1,14 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends async ? 'body.html.twig' : 'base.html.twig' %}
 
-{% block title %}
-    {{ 'match_live.title'|trans }}
-{% endblock %}
+{% set title = 'match_live.title'|trans %}
 
 {% block body %}
     <div class="match-live">
-        {% if not match %}
-            <div class="alert alert-danger">
-                {{ 'match_live.not_found'|trans({ '%profile%': path('player_profile', { 'playerId': player }) })|raw }}
+        {% if poll %}
+            <div class="alert alert-info" data-poll="1">
+                {{ 'match_live.god_selection'|trans }}
             </div>
         {% endif %}
 
@@ -19,6 +17,12 @@
                 <a href="{{ path('match_details', { 'matchId': match.id }) }}" class="btn btn-primary">
                     {{ 'match_live.match_details'|trans }}
                 </a>
+            </div>
+        {% endif %}
+
+        {% if not match and not poll %}
+            <div class="alert alert-danger">
+                {{ 'match_live.not_found'|trans({ '%profile%': path('player_profile', { 'playerId': player }) })|raw }}
             </div>
         {% endif %}
     </div>

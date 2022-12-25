@@ -7,6 +7,7 @@
         "php": "^8.1.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "rybakit/twig-deferred-extension": "^3.0",
         "sensio/framework-extra-bundle": "^6.2",
         "symfony/console": "6.0.*",
         "symfony/dotenv": "6.0.*",
