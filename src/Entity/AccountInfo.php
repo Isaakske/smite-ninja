@@ -52,7 +52,7 @@ class AccountInfo
 
         return new self(
             (int) ($data['Id'] ?? $data['playerId']),
-            $data['hz_player_name'] ?? $data['playerName'],
+            $data['hz_player_name'] ?? $data['hz_gamer_tag'] ?? $data['playerName'],
             (int) ($data['Level'] ?? $data['Account_Level']),
             (int) ($data['RankedConquest']['Tier'] ?? $data['Conquest_Tier'] ?? $data['Tier']),
             (int) ($data['RankedConquest']['Rank_Stat'] ?? $data['Rank_Stat_Conquest'] ?? $data['Rank_Stat']),

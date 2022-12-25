@@ -29,7 +29,7 @@ class Player
     {
         return new self(
             (int) $data['playerId'],
-            $data['hz_player_name'] ?? $data['playerName'],
+            $data['hz_player_name'] ?? $data['hz_gamer_tag'] ?? $data['playerName'],
             (int) $data['Account_Level'],
             (int) ($data['TaskForce'] ?? $data['taskForce']),
             God::createFromData($data),

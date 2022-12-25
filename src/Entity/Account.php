@@ -24,7 +24,7 @@ class Account
         return new self(
             (int) $data['player_id'],
             $data['Name'],
-            $data['hz_player_name'] ?? '',
+            $data['hz_player_name'] ?? $data['hz_gamer_tag'] ?? '',
             (int) $data['portal_id']
         );
     }
