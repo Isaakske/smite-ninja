@@ -40,8 +40,10 @@ class AccountController extends AbstractController
             )
         ) {
             array_unshift($recentSearches, $accountName);
+            $recentSearches = array_unique($recentSearches);
+            $recentSearches = array_slice($recentSearches, 0, 5);
             $cookies[] = Cookie::create('account_name', $accountName, new \DateTime('+14 days'));
-            $cookies[] = Cookie::create('recent_searches', implode(',', array_unique($recentSearches)), new \DateTime('+14 days'));
+            $cookies[] = Cookie::create('recent_searches', implode(',', $recentSearches), new \DateTime('+14 days'));
 
             $accounts = $smite->accounts($accountName);
 
