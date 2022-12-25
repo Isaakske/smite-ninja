@@ -15,8 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MatchController extends AbstractController
 {
     #[Route('/live/{playerId}', name: 'match_live', methods: ['GET'])]
-    #[Template]
-    public function live(Request $request, int $playerId, Smite $smite): JsonResponse|Response|array
+    public function live(Request $request, int $playerId, Smite $smite): Response
     {
         $poll = false;
         $async = (bool) $request->query->get('poll');
@@ -32,12 +31,11 @@ class MatchController extends AbstractController
             return new JsonResponse(['finished' => false]);
         }
 
-        return [
+        return $this->render($async ? 'match/liveBody.html.twig' : 'match/live.html.twig', [
             'poll' => $poll,
-            'async' => $async,
             'match' => $match,
             'player' => $playerId,
-        ];
+        ]);
     }
 
     #[Route('/match/{matchId}', name: 'match_details', methods: ['GET'])]

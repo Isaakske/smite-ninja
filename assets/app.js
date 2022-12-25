@@ -31,7 +31,7 @@ if ($('[data-poll="1"]').length) {
                 return;
             }
 
-            $('body').html(response);
+            $('body div:first').html(response);
             clearInterval(handler);
         });
     }, 10000);

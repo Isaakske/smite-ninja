@@ -13,7 +13,7 @@
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% include 'body.html.twig' %}
+        {% include 'base/theme.html.twig' %}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-dark-5@1.1.3/dist/js/darkmode.min.js"></script>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}

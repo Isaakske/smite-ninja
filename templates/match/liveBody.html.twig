@@ -1,0 +1,23 @@
+<div class="match-live">
+    {% if poll %}
+        <div class="alert alert-info" data-poll="1">
+            {{ 'match_live.god_selection'|trans }}
+        </div>
+    {% endif %}
+
+    {% if match %}
+        {% include 'match/match.html.twig' with { 'currentPlayer': player } %}
+
+        <div class="btn-wrapper">
+            <a href="{{ path('match_details', { 'matchId': match.id }) }}" class="btn btn-primary">
+                {{ 'match_live.match_details'|trans }}
+            </a>
+        </div>
+    {% endif %}
+
+    {% if not match and not poll %}
+        <div class="alert alert-danger">
+            {{ 'match_live.not_found'|trans({ '%profile%': path('player_profile', { 'playerId': player }) })|raw }}
+        </div>
+    {% endif %}
+</div>
