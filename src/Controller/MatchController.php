@@ -37,15 +37,4 @@ class MatchController extends AbstractController
             'player' => $playerId,
         ]);
     }
-
-    #[Route('/match/{matchId}', name: 'match_details', methods: ['GET'])]
-    #[Template]
-    public function details(int $matchId, Smite $smite): array
-    {
-        $match = $smite->matchDetails($matchId);
-
-        return [
-            'match' => $match,
-        ];
-    }
 }

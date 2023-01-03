@@ -65,10 +65,6 @@
         <source>match_details.win_loss</source>
         <target>Win/Loss</target>
       </trans-unit>
-      <trans-unit id="KECET2m" resname="match_live.match_details">
-        <source>match_live.match_details</source>
-        <target>Match Details</target>
-      </trans-unit>
       <trans-unit id="0NrO_xl" resname="player_profile.not_found">
         <source>player_profile.not_found</source>
         <target>Player not found.</target>

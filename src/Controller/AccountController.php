@@ -19,10 +19,9 @@ class AccountController extends AbstractController
     #[Route('/', name: 'account_search', methods: ['GET', 'POST'])]
     public function search(Request $request, Smite $smite): Response
     {
-        $cookies = [];
-        $data = new AccountSearchData($request->cookies->get('account_name'));
         $recentSearches = explode(',', $request->cookies->get('recent_searches', ''));
         $recentSearches = array_filter($recentSearches);
+        $data = new AccountSearchData(reset($recentSearches));
 
         $form = $this->createForm(AccountSearchType::class, $data);
 
@@ -42,8 +41,7 @@ class AccountController extends AbstractController
             array_unshift($recentSearches, $accountName);
             $recentSearches = array_unique($recentSearches);
             $recentSearches = array_slice($recentSearches, 0, 5);
-            $cookies[] = Cookie::create('account_name', $accountName, new \DateTime('+14 days'));
-            $cookies[] = Cookie::create('recent_searches', implode(',', $recentSearches), new \DateTime('+14 days'));
+            $cookie = Cookie::create('recent_searches', implode(',', $recentSearches), new \DateTime('+14 days'));
 
             $accounts = $smite->accounts($accountName);
 
@@ -54,7 +52,7 @@ class AccountController extends AbstractController
                 $account = reset($matchingAccounts);
 
                 $response = $this->redirectToRoute('match_live', ['playerId' => $account->getId()]);
-                array_walk($cookies, static fn (Cookie $cookie) => $response->headers->setCookie($cookie));
+                $response->headers->setCookie($cookie);
 
                 return $response;
             }
@@ -66,7 +64,9 @@ class AccountController extends AbstractController
             'recentSearches' => $recentSearches,
         ]);
 
-        array_walk($cookies, static fn (Cookie $cookie) => $response->headers->setCookie($cookie));
+        if (isset($cookie)) {
+            $response->headers->setCookie($cookie);
+        }
 
         return $response;
     }

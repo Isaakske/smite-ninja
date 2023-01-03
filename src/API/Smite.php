@@ -10,12 +10,11 @@ use App\Entity\God;
 use App\Entity\MatchInfo;
 use App\Services\MatchHelper;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class Smite
 {
-    private SessionInterface $session;
+    private RequestStack $requestStack;
     private HttpClientInterface $client;
     private MatchHelper $matchHelper;
     private string $devId;
@@ -25,7 +24,7 @@ class Smite
 
     public function __construct(RequestStack $requestStack, HttpClientInterface $client, MatchHelper $matchHelper, string $devId, string $authKey)
     {
-        $this->session = $requestStack->getSession();
+        $this->requestStack = $requestStack;
         $this->client = $client;
         $this->matchHelper = $matchHelper;
         $this->devId = $devId;
@@ -65,13 +64,6 @@ class Smite
         return null;
     }
 
-    public function matchDetails(int $matchId): ?MatchInfo
-    {
-        $info = $this->request('getmatchdetails', $matchId);
-
-        return $this->matchHelper->createMatchWithTeams($info);
-    }
-
     public function accountInfo(int $playerId): AccountInfo
     {
         $data = $this->request('getplayer', $playerId);
@@ -92,7 +84,7 @@ class Smite
         // createsession = devId + signature + timestamp
         // others = devId + signature + sessionId + timestamp + arguments
         $arguments = array_merge([$this->devId, $signature, $timestamp], $arguments);
-        if ($sessionId = $this->session->get('session_id')) {
+        if ($sessionId = $this->requestStack->getSession()->get('session_id')) {
             array_splice($arguments, 2, 0, $sessionId);
         }
 
@@ -105,18 +97,20 @@ class Smite
 
     private function checkSession(): void
     {
+        $session = $this->requestStack->getSession();
+
         if (
-            $this->session->get('session_id')
-            && ($this->session->get('session_ttl') > (new \DateTime())->format('U'))
+            $session->get('session_id')
+            && ($session->get('session_ttl') > (new \DateTime())->format('U'))
         ) {
             return;
         }
 
-        $this->session->remove('session_id');
+        $session->remove('session_id');
 
         $result = $this->request('createsession');
 
-        $this->session->set('session_id', $result['session_id']);
-        $this->session->set('session_ttl', (new \DateTime('+14 minutes'))->format('U'));
+        $session->set('session_id', $result['session_id']);
+        $session->set('session_ttl', (new \DateTime('+14 minutes'))->format('U'));
     }
 }
