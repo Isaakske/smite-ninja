@@ -42,13 +42,11 @@
 
             <tr class="{{ classes|join(' ') }}">
                 <td>
-                    {% if player.accountInfo %}
-                        {{ 'match_details.rank'|trans }}: {{ rank_name(player.accountInfo.rank) }}
-                        {% if player.accountInfo.rank %}
-                            {% set mmr = mmr + player.accountInfo.mmr %}
-                            <br>{{ 'match_details.mmr'|trans }}: {{ player.accountInfo.mmr }}
-                            <br>{{ 'match_details.win_loss'|trans }}: {{ player.accountInfo.wins }} - {{ player.accountInfo.losses }} ({{ player.accountInfo.ratio }}%)
-                        {% endif %}
+                    {{ 'match_details.rank'|trans }}: {{ rank_name(player.stats.tier) }}
+                    {% if player.stats.tier %}
+                        {% set mmr = mmr + player.stats.mmr %}
+                        <br>{{ 'match_details.mmr'|trans }}: {{ player.stats.mmr }}
+                        <br>{{ 'match_details.win_loss'|trans }}: {{ player.stats.wins }} - {{ player.stats.losses }} ({{ player.stats.ratio }}%)
                     {% endif %}
                 </td>
                 <td>
@@ -74,10 +72,10 @@
                     {% endif %}
                 </td>
                 <td>
-                    {{ 'match_details.level'|trans }}: {{ player.accountInfo.level }}
-                    <br>{{ 'match_details.mastery_level'|trans }}: {{ player.accountInfo.masteryLevel }}
-                    {% if player.accountInfo.createdAt %}
-                        <br>{{ 'match_details.created'|trans }}: {{ player.accountInfo.createdAt|date('d/m/Y') }}
+                    {{ 'match_details.level'|trans }}: {{ player.level }}
+                    <br>{{ 'match_details.mastery_level'|trans }}: {{ player.masteryLevel }}
+                    {% if player.createdAt %}
+                        <br>{{ 'match_details.created'|trans }}: {{ player.createdAt|date('d/m/Y') }}
                     {% endif %}
                 </td>
             </tr>

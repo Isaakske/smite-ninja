@@ -2,34 +2,59 @@
 
 {% set title = 'player_profile.title'|trans %}
 
+{% macro stat_details(stats) %}
+    <p>{{ 'player_profile.rank'|trans }}: {{ rank_name(stats.tier) }}</p>
+    {% if stats.tier %}
+        <p>{{ 'player_profile.mmr'|trans }}: {{ stats.mmr }}</p>
+        <p>{{ 'player_profile.win_loss'|trans }}: {{ stats.wins }} - {{ stats.losses }}</p>
+        <p>{{ 'player_profile.ratio'|trans }}: {{ stats.ratio }}%</p>
+    {% endif %}
+{% endmacro %}
+
 {% block body %}
     <div class="player-profile">
-        {% if not account %}
+        {% if not profile %}
             <div class="alert alert-danger">
                 {{ 'player_profile.not_found'|trans }}
             </div>
         {% endif %}
 
-        {% if account %}
-            <p>{{ 'player_profile.name'|trans }}: {{ account.name }}</p>
-            <p>{{ 'player_profile.level'|trans }}: {{ account.level }}</p>
-            <p>{{ 'player_profile.rank'|trans }}: {{ rank_name(account.rank) }}</p>
-            {% if account.rank %}
-                <p>{{ 'player_profile.mmr'|trans }}: {{ account.mmr }}</p>
-                <p>{{ 'player_profile.win_loss'|trans }}: {{ account.wins }} - {{ account.losses }}</p>
-                <p>{{ 'player_profile.ratio'|trans }}: {{ account.ratio }}%</p>
+        {% if profile %}
+            <p>{{ 'player_profile.name'|trans }}: {{ profile.name }}</p>
+            <p>{{ 'player_profile.level'|trans }}: {{ profile.level }}</p>
+            <p>{{ 'player_profile.mastery_level'|trans }}: {{ profile.masteryLevel }}</p>
+            {% if profile.createdAt %}
+                <p>{{ 'player_profile.created'|trans }}: {{ profile.createdAt|date('d/m/Y') }}</p>
             {% endif %}
+
             <p>
                 {{ 'player_profile.status'|trans }}:&nbsp;
-                {% set status = status_name(account.status) %}
-                {% if account.status == 3 %}
-                    <a href="{{ path('match_live', { 'playerId': account.id }) }}">{{ status }}</a>
+                {% set status = status_name(profile.status) %}
+                {% if profile.status == 3 %}
+                    <a href="{{ path('match_live', { 'playerId': profile.id }) }}">{{ status }}</a>
                 {% else %}
-                    <span class="{% if account.status %}text-success{% else %}text-danger{% endif %}">
+                    <span class="{% if profile.status %}text-success{% else %}text-danger{% endif %}">
                         {{ status }}
                     </span>
                 {% endif %}
             </p>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>{{ 'mode.ranked_conquest'|trans }}</th>
+                    <th>{{ 'mode.ranked_joust'|trans }}</th>
+                    <th>{{ 'mode.ranked_duel'|trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for stats in [profile.conquestStats, profile.joustStats, profile.duelStats] %}
+                        <td>{{ _self.stat_details(stats) }}</td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
         {% endif %}
     </div>
 {% endblock %}

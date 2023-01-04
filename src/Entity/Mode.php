@@ -18,8 +18,8 @@ class Mode
     public static function createFromData(array $data): self
     {
         return new self(
-            (int) ($data['Queue'] ?? $data['match_queue_id']),
-            $data['mapGame'] ?? $data['name']
+            (int) $data['Queue'],
+            $data['mapGame']
         );
     }
 
@@ -28,18 +28,8 @@ class Mode
         return $this->id;
     }
 
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
     }
 }

@@ -32,29 +32,14 @@ class MatchInfo
         return $this->id;
     }
 
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
     public function getMode(): Mode
     {
         return $this->mode;
     }
 
-    public function setMode(Mode $mode): void
-    {
-        $this->mode = $mode;
-    }
-
     public function getWinner(): ?int
     {
         return $this->winner;
-    }
-
-    public function setWinner(?int $winner): void
-    {
-        $this->winner = $winner;
     }
 
     public function getTeams(): array
@@ -65,10 +50,5 @@ class MatchInfo
     public function setTeams(array $teams): void
     {
         $this->teams = $teams;
-    }
-
-    public function getPlayers(): array
-    {
-        return array_merge(...$this->getTeams());
     }
 }

@@ -5,11 +5,19 @@ declare(strict_types=1);
 namespace App\Twig\Extension;
 
 use App\Entity\Mode;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class NameExtension extends AbstractExtension
 {
+    private TranslatorInterface $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function getFunctions(): array
     {
         return [
@@ -23,68 +31,68 @@ class NameExtension extends AbstractExtension
     public function getPortalName(int $portal): string
     {
         switch ($portal) {
-            case 1: return 'Hi-Rez';
-            case 5: return 'Steam';
-            case 9: return 'Playstation';
-            case 10: return 'Xbox';
-            case 22: return 'Nintendo';
-            case 25: return 'Discord';
-            case 28: return 'Epic Games';
-            default: return 'Unknown';
+            case 1: return $this->translator->trans('portal.hi_rez');
+            case 5: return $this->translator->trans('portal.steam');
+            case 9: return $this->translator->trans('portal.playstation');
+            case 10: return $this->translator->trans('portal.xbox');
+            case 22: return $this->translator->trans('portal.nintendo');
+            case 25: return $this->translator->trans('portal.discord');
+            case 28: return $this->translator->trans('portal.epic_games');
+            default: return $this->translator->trans('portal.unknown');
         }
     }
 
     public function getModeName(Mode $mode): string
     {
         switch ($mode->getId()) {
-            case 426: return 'Conquest';
-            case 435: return 'Arena';
-            case 448: return 'Joust';
-            case 445: return 'Assault';
-            case 10189: return 'Slash';
-            case 434: return 'MOTD';
+            case 426: return $this->translator->trans('mode.conquest');
+            case 435: return $this->translator->trans('mode.arena');
+            case 448: return $this->translator->trans('mode.joust');
+            case 445: return $this->translator->trans('mode.assault');
+            case 10189: return $this->translator->trans('mode.slash');
+            case 434: return $this->translator->trans('mode.motd');
             case 504:
-            case 451: return 'Ranked Conquest';
+            case 451: return $this->translator->trans('mode.ranked_conquest');
             case 503:
-            case 450: return 'Ranked Joust';
+            case 450: return $this->translator->trans('mode.ranked_joust');
             case 502:
-            case 440: return 'Ranked Duel';
-            default: return $mode->getName() ?: 'Unknown';
+            case 440: return $this->translator->trans('mode.ranked_duel');
+            default: return $mode->getName() ?: $this->translator->trans('mode.unknown');
         }
     }
 
     public function getRankName(int $rank): string
     {
         switch ($rank) {
-            case 0: return 'Unranked';
-            case 1: return 'Bronze V';
-            case 2: return 'Bronze IV';
-            case 3: return 'Bronze III';
-            case 4: return 'Bronze II';
-            case 5: return 'Bronze I';
-            case 6: return 'Silver V';
-            case 7: return 'Silver IV';
-            case 8: return 'Silver III';
-            case 9: return 'Silver II';
-            case 10: return 'Silver I';
-            case 11: return 'Gold V';
-            case 12: return 'Gold IV';
-            case 13: return 'Gold III';
-            case 14: return 'Gold II';
-            case 15: return 'Gold I';
-            case 16: return 'Platinum V';
-            case 17: return 'Platinum IV';
-            case 18: return 'Platinum III';
-            case 19: return 'Platinum II';
-            case 20: return 'Platinum I';
-            case 21: return 'Diamond V';
-            case 22: return 'Diamond IV';
-            case 23: return 'Diamond III';
-            case 24: return 'Diamond II';
-            case 25: return 'Diamond I';
-            case 26: return 'Master';
-            case 27: return 'Grandmaster';
-            default: return 'Unknown';
+            case 0: return $this->translator->trans('rank.unranked');
+            case 1: return $this->translator->trans('rank.bronze_5');
+            case 2: return $this->translator->trans('rank.bronze_4');
+            case 3: return $this->translator->trans('rank.bronze_3');
+            case 4: return $this->translator->trans('rank.bronze_2');
+            case 5: return $this->translator->trans('rank.bronze_1');
+            case 6: return $this->translator->trans('rank.silver_5');
+            case 7: return $this->translator->trans('rank.silver_4');
+            case 8: return $this->translator->trans('rank.silver_3');
+            case 9: return $this->translator->trans('rank.silver_2');
+            case 10: return $this->translator->trans('rank.silver_1');
+            case 11: return $this->translator->trans('rank.gold_5');
+            case 12: return $this->translator->trans('rank.gold_4');
+            case 13: return $this->translator->trans('rank.gold_3');
+            case 14: return $this->translator->trans('rank.gold_2');
+            case 15: return $this->translator->trans('rank.gold_1');
+            case 16: return $this->translator->trans('rank.platinum_5');
+            case 17: return $this->translator->trans('rank.platinum_4');
+            case 18: return $this->translator->trans('rank.platinum_3');
+            case 19: return $this->translator->trans('rank.platinum_2');
+            case 20: return $this->translator->trans('rank.platinum_1');
+            case 21: return $this->translator->trans('rank.diamond_5');
+            case 22: return $this->translator->trans('rank.diamond_4');
+            case 23: return $this->translator->trans('rank.diamond_3');
+            case 24: return $this->translator->trans('rank.diamond_2');
+            case 25: return $this->translator->trans('rank.diamond_1');
+            case 26: return $this->translator->trans('rank.master');
+            case 27: return $this->translator->trans('rank.grandmaster');
+            default: return $this->translator->trans('rank.unknown');
         }
     }
 
@@ -92,10 +100,10 @@ class NameExtension extends AbstractExtension
     {
         switch ($status) {
             case 1:
-            case 4: return 'Online';
-            case 2: return 'God Selection';
-            case 3: return 'In Game';
-            default: return 'Offline';
+            case 4: return $this->translator->trans('status.online');
+            case 2: return $this->translator->trans('status.god_selection');
+            case 3: return $this->translator->trans('status.in_game');
+            default: return $this->translator->trans('status.offline');
         }
     }
 }

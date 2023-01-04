@@ -34,19 +34,9 @@ class Account
         return $this->id;
     }
 
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
     }
 
     public function getHirezName(): string
@@ -54,18 +44,8 @@ class Account
         return $this->hirezName;
     }
 
-    public function setHirezName(string $hirezName): void
-    {
-        $this->hirezName = $hirezName;
-    }
-
     public function getPortal(): int
     {
         return $this->portal;
-    }
-
-    public function setPortal(int $portal): void
-    {
-        $this->portal = $portal;
     }
 }

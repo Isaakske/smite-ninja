@@ -15,10 +15,10 @@ class PlayerController extends AbstractController
     #[Template]
     public function profile(int $playerId, Smite $smite): array
     {
-        $accountInfo = $smite->accountInfo($playerId);
+        $profile = $smite->profile($playerId);
 
         return [
-            'account' => $accountInfo,
+            'profile' => $profile,
         ];
     }
 }

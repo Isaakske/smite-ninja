@@ -4,68 +4,41 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-class Player
+class Player extends AccountInfo
 {
-    private int $id;
-    private string $name;
-    private int $level;
     private int $team;
     private God $god;
-    private ?int $godLevel;
-    private ?AccountInfo $accountInfo;
+    private int $godLevel;
+    private Stats $stats;
 
-    public function __construct(int $id, string $name, int $level, int $team, God $god, ?int $godLevel, ?AccountInfo $accountInfo)
+    public function __construct(int $id, string $name, int $level, int $masteryLevel, string $createdAtString, int $team, God $god, int $godLevel, Stats $stats)
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->level = $level;
+        parent::__construct($id, $name, $level, $masteryLevel, $createdAtString);
+
         $this->team = $team;
         $this->god = $god;
         $this->godLevel = $godLevel;
-        $this->accountInfo = $accountInfo;
+        $this->stats = $stats;
     }
 
     public static function createFromData(array $data): self
     {
+        $godLevel = ((int) $data['GodLevel']) - 1;
+        if ($godLevel < 0) {
+            $godLevel = 0;
+        }
+
         return new self(
             (int) $data['playerId'],
-            $data['hz_player_name'] ?? $data['hz_gamer_tag'] ?? $data['playerName'],
+            $data['playerName'],
             (int) $data['Account_Level'],
-            (int) ($data['TaskForce'] ?? $data['taskForce']),
+            (int) $data['Account_Gods_Played'],
+            $data['playerCreated'],
+            (int) $data['taskForce'],
             God::createFromData($data),
-            array_key_exists('GodLevel', $data) ? ((int) $data['GodLevel']) - 1 : null,
-            AccountInfo::createFromData($data)
+            $godLevel,
+            Stats::createForMatch($data)
         );
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    public function getLevel(): int
-    {
-        return $this->level;
-    }
-
-    public function setLevel(int $level): void
-    {
-        $this->level = $level;
     }
 
     public function getTeam(): int
@@ -73,19 +46,9 @@ class Player
         return $this->team;
     }
 
-    public function setTeam(int $team): void
-    {
-        $this->team = $team;
-    }
-
     public function getGod(): God
     {
         return $this->god;
-    }
-
-    public function setGod(God $god): void
-    {
-        $this->god = $god;
     }
 
     public function getGodLevel(): ?int
@@ -93,18 +56,8 @@ class Player
         return $this->godLevel;
     }
 
-    public function setGodLevel(?int $godLevel): void
+    public function getStats(): Stats
     {
-        $this->godLevel = $godLevel;
-    }
-
-    public function getAccountInfo(): ?AccountInfo
-    {
-        return $this->accountInfo;
-    }
-
-    public function setAccountInfo(?AccountInfo $accountInfo): void
-    {
-        $this->accountInfo = $accountInfo;
+        return $this->stats;
     }
 }

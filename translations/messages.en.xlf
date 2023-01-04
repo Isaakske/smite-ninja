@@ -143,7 +143,7 @@
       </trans-unit>
       <trans-unit id="TTweZBv" resname="match_live.god_selection">
         <source>match_live.god_selection</source>
-        <target>Player is in God Selection. Waiting for match to start...</target>
+        <target>Player is in God Selection. Waiting for the match to start...</target>
       </trans-unit>
       <trans-unit id="if1CjXB" resname="base.title">
         <source>base.title</source>
@@ -152,6 +152,218 @@
       <trans-unit id="qKczhCj" resname="match_details.average">
         <source>match_details.average</source>
         <target>Average MMR</target>
+      </trans-unit>
+      <trans-unit id="jUIc9u5" resname="player_profile.mastery_level">
+        <source>player_profile.mastery_level</source>
+        <target>Mastery Level</target>
+      </trans-unit>
+      <trans-unit id="CahieeS" resname="player_profile.created">
+        <source>player_profile.created</source>
+        <target>Account Created</target>
+      </trans-unit>
+      <trans-unit id="_MEnHtG" resname="portal.hi_rez">
+        <source>portal.hi_rez</source>
+        <target>Hi-Rez</target>
+      </trans-unit>
+      <trans-unit id="qi38ysJ" resname="portal.steam">
+        <source>portal.steam</source>
+        <target>Steam</target>
+      </trans-unit>
+      <trans-unit id="ZpHtqvf" resname="portal.playstation">
+        <source>portal.playstation</source>
+        <target>Playstation</target>
+      </trans-unit>
+      <trans-unit id=".7M.KRs" resname="portal.xbox">
+        <source>portal.xbox</source>
+        <target>Xbox</target>
+      </trans-unit>
+      <trans-unit id="c3E_QTU" resname="portal.nintendo">
+        <source>portal.nintendo</source>
+        <target>Nintendo</target>
+      </trans-unit>
+      <trans-unit id="VrKZ.xD" resname="portal.discord">
+        <source>portal.discord</source>
+        <target>Discord</target>
+      </trans-unit>
+      <trans-unit id="kH_8WPf" resname="portal.epic_games">
+        <source>portal.epic_games</source>
+        <target>Epic Games</target>
+      </trans-unit>
+      <trans-unit id="0LMprgc" resname="portal.unknown">
+        <source>portal.unknown</source>
+        <target>Unknown</target>
+      </trans-unit>
+      <trans-unit id="adbey1W" resname="mode.conquest">
+        <source>mode.conquest</source>
+        <target>Conquest</target>
+      </trans-unit>
+      <trans-unit id="p8HASzi" resname="mode.arena">
+        <source>mode.arena</source>
+        <target>Arena</target>
+      </trans-unit>
+      <trans-unit id="hM5ZRyT" resname="mode.joust">
+        <source>mode.joust</source>
+        <target>Joust</target>
+      </trans-unit>
+      <trans-unit id="zEKrBFu" resname="mode.assault">
+        <source>mode.assault</source>
+        <target>Assault</target>
+      </trans-unit>
+      <trans-unit id="RouUxC7" resname="mode.slash">
+        <source>mode.slash</source>
+        <target>Slash</target>
+      </trans-unit>
+      <trans-unit id="JZugRFR" resname="mode.motd">
+        <source>mode.motd</source>
+        <target>MOTD</target>
+      </trans-unit>
+      <trans-unit id="T_epPl_" resname="mode.ranked_conquest">
+        <source>mode.ranked_conquest</source>
+        <target>Ranked Conquest</target>
+      </trans-unit>
+      <trans-unit id="co1U9UW" resname="mode.ranked_joust">
+        <source>mode.ranked_joust</source>
+        <target>Ranked Joust</target>
+      </trans-unit>
+      <trans-unit id="0Z0SCjV" resname="mode.ranked_duel">
+        <source>mode.ranked_duel</source>
+        <target>Ranked Duel</target>
+      </trans-unit>
+      <trans-unit id="hx.t2Go" resname="mode.unknown">
+        <source>mode.unknown</source>
+        <target>Unknown</target>
+      </trans-unit>
+      <trans-unit id="GURRcyu" resname="rank.unranked">
+        <source>rank.unranked</source>
+        <target>Unranked</target>
+      </trans-unit>
+      <trans-unit id="36B8u9c" resname="rank.bronze_5">
+        <source>rank.bronze_5</source>
+        <target>Bronze V</target>
+      </trans-unit>
+      <trans-unit id="7SXkLpX" resname="rank.bronze_4">
+        <source>rank.bronze_4</source>
+        <target>Bronze IV</target>
+      </trans-unit>
+      <trans-unit id="A8S575." resname="rank.bronze_3">
+        <source>rank.bronze_3</source>
+        <target>Bronze III</target>
+      </trans-unit>
+      <trans-unit id="7lWVG3o" resname="rank.bronze_2">
+        <source>rank.bronze_2</source>
+        <target>Bronze II</target>
+      </trans-unit>
+      <trans-unit id="NHitqlC" resname="rank.bronze_1">
+        <source>rank.bronze_1</source>
+        <target>Bronze I</target>
+      </trans-unit>
+      <trans-unit id="qfF9ZVe" resname="rank.silver_5">
+        <source>rank.silver_5</source>
+        <target>Silver V</target>
+      </trans-unit>
+      <trans-unit id="UEezAXv" resname="rank.silver_4">
+        <source>rank.silver_4</source>
+        <target>Silver IV</target>
+      </trans-unit>
+      <trans-unit id="9HFrcLh" resname="rank.silver_3">
+        <source>rank.silver_3</source>
+        <target>Silver III</target>
+      </trans-unit>
+      <trans-unit id="QqM58_d" resname="rank.silver_2">
+        <source>rank.silver_2</source>
+        <target>Silver II</target>
+      </trans-unit>
+      <trans-unit id="BQtiban" resname="rank.silver_1">
+        <source>rank.silver_1</source>
+        <target>Silver I</target>
+      </trans-unit>
+      <trans-unit id="fnS0Q9A" resname="rank.gold_5">
+        <source>rank.gold_5</source>
+        <target>Gold V</target>
+      </trans-unit>
+      <trans-unit id="J2a2R7e" resname="rank.gold_4">
+        <source>rank.gold_4</source>
+        <target>Gold IV</target>
+      </trans-unit>
+      <trans-unit id="7A.TEBK" resname="rank.gold_3">
+        <source>rank.gold_3</source>
+        <target>Gold III</target>
+      </trans-unit>
+      <trans-unit id="I80cPiO" resname="rank.gold_2">
+        <source>rank.gold_2</source>
+        <target>Gold II</target>
+      </trans-unit>
+      <trans-unit id="xrmlr0X" resname="rank.gold_1">
+        <source>rank.gold_1</source>
+        <target>Gold I</target>
+      </trans-unit>
+      <trans-unit id="4wjeQ32" resname="rank.platinum_5">
+        <source>rank.platinum_5</source>
+        <target>Platinum V</target>
+      </trans-unit>
+      <trans-unit id="wgaHO89" resname="rank.platinum_4">
+        <source>rank.platinum_4</source>
+        <target>Platinum IV</target>
+      </trans-unit>
+      <trans-unit id="OveItrU" resname="rank.platinum_3">
+        <source>rank.platinum_3</source>
+        <target>Platinum III</target>
+      </trans-unit>
+      <trans-unit id="iROIQR6" resname="rank.platinum_2">
+        <source>rank.platinum_2</source>
+        <target>Platinum II</target>
+      </trans-unit>
+      <trans-unit id="V_KCvZ_" resname="rank.platinum_1">
+        <source>rank.platinum_1</source>
+        <target>Platinum I</target>
+      </trans-unit>
+      <trans-unit id="BnIpLVi" resname="rank.diamond_5">
+        <source>rank.diamond_5</source>
+        <target>Diamond V</target>
+      </trans-unit>
+      <trans-unit id=".11mzK1" resname="rank.diamond_4">
+        <source>rank.diamond_4</source>
+        <target>Diamond IV</target>
+      </trans-unit>
+      <trans-unit id="886.2t1" resname="rank.diamond_3">
+        <source>rank.diamond_3</source>
+        <target>Diamond III</target>
+      </trans-unit>
+      <trans-unit id="t22ZcU9" resname="rank.diamond_2">
+        <source>rank.diamond_2</source>
+        <target>Diamond II</target>
+      </trans-unit>
+      <trans-unit id="Bhiw4VT" resname="rank.diamond_1">
+        <source>rank.diamond_1</source>
+        <target>Diamond I</target>
+      </trans-unit>
+      <trans-unit id="BEQJnar" resname="rank.master">
+        <source>rank.master</source>
+        <target>Master</target>
+      </trans-unit>
+      <trans-unit id="JaYbIKz" resname="rank.grandmaster">
+        <source>rank.grandmaster</source>
+        <target>Grandmaster</target>
+      </trans-unit>
+      <trans-unit id="1aM4a1." resname="rank.unknown">
+        <source>rank.unknown</source>
+        <target>Unknown</target>
+      </trans-unit>
+      <trans-unit id="Ox5iAwP" resname="status.online">
+        <source>status.online</source>
+        <target>Online</target>
+      </trans-unit>
+      <trans-unit id="JmwvZB5" resname="status.god_selection">
+        <source>status.god_selection</source>
+        <target>God Selection</target>
+      </trans-unit>
+      <trans-unit id="fno6v97" resname="status.in_game">
+        <source>status.in_game</source>
+        <target>In Game</target>
+      </trans-unit>
+      <trans-unit id="77UF_55" resname="status.offline">
+        <source>status.offline</source>
+        <target>Offline</target>
       </trans-unit>
     </body>
   </file>

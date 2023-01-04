@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\API;
 
 use App\Entity\Account;
-use App\Entity\AccountInfo;
 use App\Entity\God;
 use App\Entity\MatchInfo;
+use App\Entity\Profile;
 use App\Services\MatchHelper;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -64,12 +64,12 @@ class Smite
         return null;
     }
 
-    public function accountInfo(int $playerId): AccountInfo
+    public function profile(int $playerId): ?Profile
     {
         $data = $this->request('getplayer', $playerId);
         $statusData = $this->request('getplayerstatus', $playerId);
 
-        return AccountInfo::createFromData((array) array_merge(reset($data), reset($statusData)));
+        return Profile::createFromData((array) array_merge(reset($data), reset($statusData)));
     }
 
     private function request(string $action, string|int ...$arguments): array
