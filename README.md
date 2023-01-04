@@ -1,4 +1,4 @@
-# Smite Api
+# Smite Ninja
 
 A Symfony 6 project making use of the Smite API to display various stats.
 
@@ -14,6 +14,6 @@ Build and run using docker-compose.
 cd docker && docker-compose build && docker-compose up -d
 ```
 
-## Documentation
+## API Documentation
 
 https://docs.google.com/a/hirezstudios.com/document/d/1OFS-3ocSx-1Rvg4afAnEHlT3917MAK_6eJTR6rzr-BM/edit
