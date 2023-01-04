@@ -21,7 +21,7 @@ class AccountController extends AbstractController
     {
         $recentSearches = explode(',', $request->cookies->get('recent_searches', ''));
         $recentSearches = array_filter($recentSearches);
-        $data = new AccountSearchData(reset($recentSearches));
+        $data = new AccountSearchData(reset($recentSearches) ?: null);
 
         $form = $this->createForm(AccountSearchType::class, $data);
 
