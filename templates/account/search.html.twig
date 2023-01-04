@@ -3,6 +3,8 @@
 {% set title = 'account_search.title'|trans %}
 
 {% block body %}
+    <img src="{{ asset('images/ninja.png') }}" class="logo" />
+
     <div class="account-search">
         {{ form_start(form, { 'action': path('account_search'), 'method': 'POST' }) }}
             <div class="mb-3">
