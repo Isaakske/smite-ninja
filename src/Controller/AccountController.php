@@ -62,6 +62,7 @@ class AccountController extends AbstractController
             'form' => $form->createView(),
             'accounts' => $accounts ?? null,
             'recentSearches' => $recentSearches,
+            'disableHome' => true,
         ]);
 
         if (isset($cookie)) {

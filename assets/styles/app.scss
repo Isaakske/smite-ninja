@@ -9,6 +9,12 @@ body {
     align-items: center;
     flex-direction: column;
 
+    .home {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+    }
+
     > div, > form {
         width: 50%;
     }
