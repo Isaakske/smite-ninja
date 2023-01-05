@@ -118,7 +118,7 @@
             "config/preload.php",
             "config/routes/framework.yaml",
             "config/services.yaml",
-            "public/index.php",
+            "public_html/index.php",
             "src/Controller/.gitignore",
             "src/Kernel.php"
         ]

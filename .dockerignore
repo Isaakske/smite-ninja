@@ -1,5 +1,5 @@
 # Ignoring things here will speed up docker build, especially on you local system
 var
 vendor
-public/build
+public_html/build
 .git
