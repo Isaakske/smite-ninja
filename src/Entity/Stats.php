@@ -29,7 +29,7 @@ class Stats
             (int) $data['Tier'],
             (int) $data['Rank_Stat'],
             (int) $data['tierWins'],
-            (int) $data['tierPoints']
+            (int) $data['tierLosses']
         );
     }
 
