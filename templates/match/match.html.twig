@@ -2,6 +2,7 @@
 <table class="table table-bordered">
     <thead>
     <tr>
+        <th>{{ 'match_details.ranked_season_9'|trans }}</th>
         <th>{{ 'match_details.ranked'|trans }}</th>
         <th>{{ 'match_details.god'|trans }}</th>
         <th>{{ 'match_details.name'|trans }}</th>
@@ -14,7 +15,7 @@
         {% set classes = [] %}
 
         {% if not loop.first %}
-            <tr><td colspan="4" /></tr>
+            <tr><td colspan="5" /></tr>
         {% endif %}
 
         {% for player in team %}
@@ -42,11 +43,21 @@
 
             <tr class="{{ classes|join(' ') }}">
                 <td>
+                    {% set url = smite_guru_url(player) %}
+                    {% if not url %}
+                        <span class="text-warning">{{ 'match_details.hidden'|trans }}</span>
+                    {% else %}
+                        <a href="{{ url }}">{{ 'match_details.smite_guru'|trans }}</a>
+                    {% endif %}
+                </td>
+                <td>
                     {{ 'match_details.rank'|trans }}: {{ rank_name(player.stats.tier) }}
                     {% if player.stats.tier %}
                         {% set mmr = mmr + player.stats.mmr %}
                         <br>{{ 'match_details.mmr'|trans }}: {{ player.stats.mmr }}
                         <br>{{ 'match_details.win_loss'|trans }}: {{ player.stats.wins }} - {{ player.stats.losses }} ({{ player.stats.ratio }}%)
+                    {% else %}
+                        {% set mmr = mmr + 1500 %}
                     {% endif %}
                 </td>
                 <td>
@@ -83,7 +94,7 @@
 
         {% if mmr %}
             <tr class="{{ classes|join(' ') }} text-center">
-                <td colspan="4">{{ 'match_details.average'|trans }}: {{ (mmr/(team|length))|round }}</td>
+                <td colspan="5">{{ 'match_details.average'|trans }}: {{ (mmr/(team|length))|round }}</td>
             </tr>
         {% endif %}
     {% endfor %}

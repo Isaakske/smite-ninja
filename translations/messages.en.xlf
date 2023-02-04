@@ -365,6 +365,14 @@
         <source>status.offline</source>
         <target>Offline</target>
       </trans-unit>
+      <trans-unit id="cW7AMID" resname="match_details.ranked_season_9">
+        <source>match_details.ranked_season_9</source>
+        <target>Season 9</target>
+      </trans-unit>
+      <trans-unit id="BSrS9s9" resname="match_details.smite_guru">
+        <source>match_details.smite_guru</source>
+        <target>Smite Guru</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
